@@ -16,10 +16,10 @@ class MyBox extends THREE.Mesh {
     // Un Mesh se compone de geometría y material
     // - Parámetros del constructor
     // BoxGeometry(width : Float, height : Float, depth : Float, widthSegments : Integer, heightSegments : Integer, depthSegments : Integer)
-    this.geometry = new THREE.BoxGeometry (1,1,1);
+    this.geometry = new THREE.BoxGeometry (8,8,8);
     // Las primitivas básicas se crean centradas en el origen
     // Se puede modificar su posición con respecto al sistema de coordenadas local con una transformación aplicada directamente a la geometría.
-    this.geometry.applyMatrix (new THREE.Matrix4().makeTranslation(0,0.5,0));
+    this.geometry.applyMatrix (new THREE.Matrix4().makeTranslation(0,0,0));
     // Como material se crea uno a partir de un color
     //this.material = new THREE.MeshPhongMaterial({color: 0x888888});
     this.material = new THREE.MeshNormalMaterial();
@@ -27,6 +27,7 @@ class MyBox extends THREE.Mesh {
   }
   
   createGUI () {
+    /*
     // Controles para el tamaño, la orientación y la posición de la caja
     this.guiControls = new function () {
       this.sizeX = 1.0;
@@ -60,6 +61,8 @@ class MyBox extends THREE.Mesh {
     
     // Se crea una sección para los controles de la caja
     /* Esto es lo que crea el cajoncillo a la derecha vaya */
+    
+    /*
     var folder = gui.addFolder ('Controles de la Caja');
     // Estas lineas son las que añaden los componentes de la interfaz
     // Las tres cifras indican un valor mínimo, un máximo y el incremento
@@ -77,6 +80,8 @@ class MyBox extends THREE.Mesh {
     folder.add (this.guiControls, 'posZ', -20.0, 20.0, 0.1).name ('Posición Z : ').listen();
     
     folder.add (this.guiControls, 'reset').name ('[ Reset ]');
+
+    */
   }
   
   update () {
@@ -86,10 +91,12 @@ class MyBox extends THREE.Mesh {
     // Después, la rotación en Y
     // Luego, la rotación en X
     // Y por último la traslación
+    /*
     this.position.set (this.guiControls.posX,this.guiControls.posY,this.guiControls.posZ);
     this.rotation.set (this.guiControls.rotX,this.guiControls.rotY,this.guiControls.rotZ);
     this.scale.set (this.guiControls.sizeX,this.guiControls.sizeY,this.guiControls.sizeZ);
     // Pongo esto así para que no influya en los controles de la caja
     this.rotation.set (this.guiControls.rotX,this.guiControls.rotY,this.guiControls.rotZ);
+    */
   }
 }

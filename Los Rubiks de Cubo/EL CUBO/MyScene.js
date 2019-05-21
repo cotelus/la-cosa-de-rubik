@@ -24,8 +24,8 @@ class MyScene extends THREE.Scene {
     //this.createGround ();
     
     // Y unos ejes. Imprescindibles para orientarnos sobre dónde están las cosas
-    this.axisCubo = new THREE.AxesHelper (5);
-    this.add (this.axisCubo);
+    //this.axisCubo = new THREE.AxesHelper (5);
+    //this.add (this.axisCubo);
     
     
     // Por último creamos la caja del ejemplo, como una instancia de una clase propia, que gestionará su creación y la interacción con la misma
@@ -86,15 +86,15 @@ class MyScene extends THREE.Scene {
     // Accedemos a la variable global   gui   declarada en   script.js   para añadirle la parte de interfaz que corresponde a los elementos de esta clase
     
     // Se crea una sección para los controles de esta clase
-    var folder = gui.addFolder ('Luz y Ejes');
+    //var folder = gui.addFolder ('Luz y Ejes');
     
     // Se le añade un control para la intensidad de la luz
-    folder.add (this.guiControls, 'lightIntensity', 0, 1, 0.1).name('Intensidad de la Luz : ');
+    //folder.add (this.guiControls, 'lightIntensity', 0, 1, 0.1).name('Intensidad de la Luz : ');
     
     // Y otro para mostrar u ocultar los ejes
-    folder.add (this.guiControls, 'axisOnOff').name ('Mostrar ejes : ');
+    //folder.add (this.guiControls, 'axisOnOff').name ('Mostrar ejes : ');
 
-    folder.add (this.guiControls, 'flatShading').name('Sombreado: ');
+    //folder.add (this.guiControls, 'flatShading').name('Sombreado: ');
   }
   
   createLights () {
@@ -130,16 +130,16 @@ class MyScene extends THREE.Scene {
   update () {
     // Se actualizan los elementos de la escena para cada frame
     // Se actualiza la intensidad de la luz con lo que haya indicado el usuario en la gui
-    this.spotLight.intensity = this.guiControls.lightIntensity;
+    //this.spotLight.intensity = this.guiControls.lightIntensity;
     
     // Se muestran o no los ejes según lo que idique la GUI
-    this.axisCubo.visible = this.guiControls.axisOnOff;
+    //this.axisCubo.visible = this.guiControls.axisOnOff;
 
     //Se actualiza el sombreado
-    this.caja.material.flatShading = this.guiControls.flatShading;
+    //this.caja.material.flatShading = this.guiControls.flatShading;
     
     // Se actualiza la posición de la cámara según su controlador
-    this.cameraControl.update();
+    //this.cameraControl.update();
     
     // Se actualiza el resto del modelo
     //this.caja.update();
