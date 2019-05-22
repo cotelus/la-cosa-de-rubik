@@ -9,6 +9,7 @@ renderer = null;
 /// El objeto que referencia a la interfaz gráfica de usuario
 gui = null;
 
+var lastMPos = {};
 
 /// Se crea y configura un renderer WebGL
 /**
@@ -52,6 +53,22 @@ function onWindowResize () {
   renderer.setSize (window.innerWidth, window.innerHeight);
 }
 
+// Función que rota el objeto en función del ratón
+function mouseMove(event){
+
+  if (typeof(lastMPos.x) != 'undefined'){
+      var deltaX = lastMPos.x - event.clientX,
+          deltaY = lastMPos.y - event.clientY;
+
+      scene.caja.rotation.y += deltaX * 0.005;
+  }
+  lastMPos = {
+    x : event.clientX,
+    y : event.clientY
+  };
+
+}
+
 /// La función principal
 $(function () {
   // Se crea el renderer
@@ -63,6 +80,7 @@ $(function () {
   // listeners
   // Cada vez que el usuario cambie el tamaño de la ventana se llama a la función que actualiza la cámara y el renderer
   window.addEventListener ("resize", onWindowResize);
+  document.addEventListener("mousemove", mouseMove);
   
   // Se crea una interfaz gráfica de usuario vacia
   gui = new dat.GUI();

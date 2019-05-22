@@ -5,6 +5,7 @@
  */
 
 class MyScene extends THREE.Scene {
+
   constructor (unRenderer) {
     super();
     

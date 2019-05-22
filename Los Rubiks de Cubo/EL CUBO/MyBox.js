@@ -1,4 +1,4 @@
- var rotateYCube = 0.0;
+
 
  /* Esta es la clase que crea la malla del objeto */
 class MyBox extends THREE.Mesh {
@@ -6,6 +6,7 @@ class MyBox extends THREE.Mesh {
     - Llama a la clase padre para generar la malla.
     - Se crea el "cuerpo"
     */
+
   constructor() {
     super();
     
@@ -83,7 +84,7 @@ class MyBox extends THREE.Mesh {
 
     */
   }
-  
+
   update () {
     // Con independencia de cómo se escriban las 3 siguientes líneas, el orden en el que se aplican las transformaciones es:
     // Primero, el escalado
