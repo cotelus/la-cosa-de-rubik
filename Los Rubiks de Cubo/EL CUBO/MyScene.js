@@ -33,6 +33,9 @@ class MyScene extends THREE.Scene {
     this.caja = new MyBox();
     this.add (this.caja);
 
+    //this.cubo = new Cubo();
+    //this.add (this.cubo);
+
   }
   
   createCamera (unRenderer) {
