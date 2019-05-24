@@ -6,9 +6,12 @@ class Cubo extends THREE.Mesh {
 
 		this.createGUI();
 
-		this.cubeDim = 1;
 
-		this.cubePositions = this.getCubePositions();
+		this.cubeDim = 3;
+
+		this.cubePositions = [];
+
+		this.getCubePositions();
 
 		this.cubiegroup = new THREE.Group();
 
@@ -16,10 +19,14 @@ class Cubo extends THREE.Mesh {
 
 		this.makeCubies();
 
+
 		this.setCubies();
 
-	}
 
+		this.add(this.cubiegroup);
+
+	
+	}
 
 	/*
 
@@ -29,14 +36,15 @@ class Cubo extends THREE.Mesh {
 	*/
 
 	getCubePositions(){
-		var cubeP = [];
-
-		for(let z = 1; z >= -1; z--)
-			for (let y = -1; y <= 1; y++)
-				for (let x = 1; x >= -1; x++){
-					cubeP.push([x * this.cubeDim, y * this.cubeDim, z * this.cubeDim]);
+		let cont = 0;
+		for(let z = 1; z >= -1; z--){
+			for (let y = -1; y <= 1; y++){
+				for (let x = 1; x >= -1; x--){
+					this.cubePositions.push([x * this.cubeDim, y * this.cubeDim, z * this.cubeDim]);
+					cont++;
 				}
-		return cubeP;
+			}
+		}
 	}
 
 	makeCubies(){
@@ -44,15 +52,18 @@ class Cubo extends THREE.Mesh {
 		let material = new THREE.MeshNormalMaterial();
 		for (let i = 0; i < 27; i++){
 			let cubie = new THREE.Mesh(geometry, material);
-			this.cubies.add(cubie);
-			this.cubiegroup.add(cubie);
+			this.cubies[i] = new THREE.Mesh(geometry, material);
+			this.cubiegroup.add(this.cubies[i]);
 		}
 	}
 
 	setCubies(){
-		for (let cubeNum in cubies)
-			this.cubies[cubeNum].position.set(...this.cubePositions[cubeNum]);
-		
+		for (let i = 0; i < 27; i++){
+			this.cubies[i].position.x = this.cubePositions[i][0];
+			this.cubies[i].position.y = this.cubePositions[i][1];
+			this.cubies[i].position.z = this.cubePositions[i][2];
+
+		}
 	}
 
 	createGUI(){

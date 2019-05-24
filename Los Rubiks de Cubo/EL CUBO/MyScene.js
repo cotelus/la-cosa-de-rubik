@@ -30,11 +30,11 @@ class MyScene extends THREE.Scene {
     
     
     // Por último creamos la caja del ejemplo, como una instancia de una clase propia, que gestionará su creación y la interacción con la misma
-    this.caja = new MyBox();
-    this.add (this.caja);
+    //this.caja = new MyBox();
+    //this.add (this.caja);
 
-    //this.cubo = new Cubo();
-    //this.add (this.cubo);
+    this.cubo = new Cubo();
+    this.add (this.cubo);
 
   }
   
@@ -147,6 +147,6 @@ class MyScene extends THREE.Scene {
     
     // Se actualiza el resto del modelo
     //this.caja.update();
-    this.caja.update();
+    //this.caja.update();
   }
 }

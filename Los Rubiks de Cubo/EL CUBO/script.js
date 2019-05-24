@@ -60,8 +60,8 @@ function mouseMove(event){
       var deltaX = lastMPos.x - event.clientX,
           deltaY = lastMPos.y - event.clientY;
 
-      scene.caja.rotation.y -= deltaX * 0.005;
-      scene.caja.rotation.x -= deltaY * 0.005;
+      scene.cubo.rotation.y -= deltaX * 0.005;
+      scene.cubo.rotation.x -= deltaY * 0.01;
   }
   lastMPos = {
     x : event.clientX,
