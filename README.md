@@ -1,3 +1,27 @@
+Ve borrando esto y añadiendo unos nuevos conforme se vayan haciendo cosas
+# El orden de las cosas
+## 1.- Rotación del cubo
+Por ahora la rotación se hace con la GUI. Hay que cambiarlo para que la rotación se haga al pinchar en la escena y arrastre. No obstante es una solución meh mientras se siguen haciendo el resto de cosas
+## 2.- Creo que se complica la cosa al tratar el cubo de rubik como un group
+Se suele usar para hacer las mismas operaciones X veces en Y objetos distintos. Para que funcione bien creo que hay que diferenciar los cubos ANTES de meterlos en el cubo grande. Es decir, coger los cubitos, pillar el cubo que se está pinchando, crear otro grupo con los cubos de la cara que se quiere girar y girarla.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # El Rubik de CUBO
 ## Práctica de la asignatura Sistemas Gráficos. UGR
 
