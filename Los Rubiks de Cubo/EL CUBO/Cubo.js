@@ -4,6 +4,9 @@ class Cubo extends THREE.Mesh {
 	constructor(){
 		super();
 
+		this.createGUI();
+
+
 		this.cubeDim = 3;
 
 		this.cubePositions = [];
@@ -63,8 +66,24 @@ class Cubo extends THREE.Mesh {
 		}
 	}
 
-	update(){
+	createGUI () {
+		// Controles para el movimiento de la parte móvil
+		this.guiControls = new function () {
+			this.rotacionY = 0.0;
+			this.rotacionZ = 0.0;
+		} 
 		
+		// Se crea una sección para los controles de la caja
+		var folder = gui.addFolder ('Controles del cubo');
+		// Estas lineas son las que añaden los componentes de la interfaz
+		// Las tres cifras indican un valor mínimo, un máximo y el incremento
+		// Hay que cambiar el Math.PI/4 por Math.PI/2 cuando se haga la rotación bien
+		folder.add (this.guiControls, 'rotacionY', 0.0, Math.PI, Math.PI/4).name ('Rotación Y : ').listen();
+		folder.add (this.guiControls, 'rotacionZ', 0.0, Math.PI, Math.PI/4).name ('Rotación Z : ').listen();
+	}
+
+	update(){
+		this.rotation.set (0.0, this.guiControls.rotacionY, this.guiControls.rotacionZ);
 	}
 
 }
