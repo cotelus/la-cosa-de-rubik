@@ -6,6 +6,10 @@ class Cubo extends THREE.Mesh {
 
 		this.createGUI();
 
+		// Pruebas para crear un array de colores y crear luego un algoritmo que colorée los cuadrados del cubo
+		this.colores = [];
+		this.setColors();
+
 
 		this.cubeDim = 3;
 
@@ -49,12 +53,55 @@ class Cubo extends THREE.Mesh {
 
 	makeCubies(){
 		let geometry = new THREE.BoxGeometry(this.cubeDim - 0.05, this.cubeDim - 0.05, this.cubeDim - 0.05);
-		let material = new THREE.MeshNormalMaterial();
-		for (let i = 0; i < 27; i++){
+		//let material = new THREE.MeshNormalMaterial();
+		let material = new THREE.MeshLambertMaterial({
+			color: this.colores[0],
+			flatShading: false,
+		});
+		/*for (let i = 0; i < 27; i++){
+			let cubie = new THREE.Mesh(geometry, material);
+			this.cubies[i] = new THREE.Mesh(geometry, material);
+			this.cubiegroup.add(this.cubies[i]);
+		}*/
+		for (let i = 0; i < 9; i++){
 			let cubie = new THREE.Mesh(geometry, material);
 			this.cubies[i] = new THREE.Mesh(geometry, material);
 			this.cubiegroup.add(this.cubies[i]);
 		}
+		material = new THREE.MeshLambertMaterial({
+			color: this.colores[1],
+			flatShading: false,
+		});
+		for (let i = 9; i < 18; i++){
+			let cubie = new THREE.Mesh(geometry, material);
+			this.cubies[i] = new THREE.Mesh(geometry, material);
+			this.cubiegroup.add(this.cubies[i]);
+		}
+		material = new THREE.MeshLambertMaterial({
+			color: this.colores[2],
+			flatShading: false,
+		});
+		for (let i = 18; i < 27; i++){
+			let cubie = new THREE.Mesh(geometry, material);
+			this.cubies[i] = new THREE.Mesh(geometry, material);
+			this.cubiegroup.add(this.cubies[i]);
+		}
+	}
+
+	setColors(){
+		// ROJO
+		this.colores[0] = 0xFF0000;
+		// VERDE
+		this.colores[1] = 0x00FF00;
+		// AZUL
+		this.colores[2] = 0x0000FF;
+		// AMARILLO
+		this.colores[3] = 0xFFFF00;
+		// VIOLETA
+		this.colores[4] = 0xFF00FF;
+		// BLANCO
+		this.colores[5] = 0xFFFFFF;
+
 	}
 
 	setCubies(){
@@ -78,12 +125,17 @@ class Cubo extends THREE.Mesh {
 		// Estas lineas son las que añaden los componentes de la interfaz
 		// Las tres cifras indican un valor mínimo, un máximo y el incremento
 		// Hay que cambiar el Math.PI/4 por Math.PI/2 cuando se haga la rotación bien
-		folder.add (this.guiControls, 'rotacionY', 0.0, Math.PI, Math.PI/4).name ('Rotación Y : ').listen();
-		folder.add (this.guiControls, 'rotacionZ', 0.0, Math.PI, Math.PI/4).name ('Rotación Z : ').listen();
+		folder.add (this.guiControls, 'rotacionY', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Y : ').listen();
+		folder.add (this.guiControls, 'rotacionZ', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Z : ').listen();
 	}
 
 	update(){
-		this.rotation.set (0.0, this.guiControls.rotacionY, this.guiControls.rotacionZ);
+		// Esta función rota todo el objeto sobre todos los ejes
+		//this.rotation.set (0.0, this.guiControls.rotacionY, this.guiControls.rotacionZ);
+
+		// Esta rotación, eliges qué rotar y sobre qué eje
+		this.cubiegroup.rotation.y = this.guiControls.rotacionY;
+		this.cubiegroup.rotation.z = this.guiControls.rotacionZ;
 	}
 
 }
