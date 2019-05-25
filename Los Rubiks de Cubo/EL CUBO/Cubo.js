@@ -54,15 +54,42 @@ class Cubo extends THREE.Mesh {
 	makeCubies(){
 		let geometry = new THREE.BoxGeometry(this.cubeDim - 0.05, this.cubeDim - 0.05, this.cubeDim - 0.05);
 		//let material = new THREE.MeshNormalMaterial();
-		let material = new THREE.MeshLambertMaterial({
+		/*let material = new THREE.MeshLambertMaterial({
 			color: this.colores[0],
 			flatShading: false,
-		});
-		/*for (let i = 0; i < 27; i++){
+		});*/
+		let material = new THREE.MeshFaceMaterial([
+			new THREE.MeshLambertMaterial({
+				color: this.colores[0], 
+				flatShading: true
+			}),
+			new THREE.MeshLambertMaterial({
+				color: this.colores[1], 
+				flatShading: true
+			}),
+			new THREE.MeshLambertMaterial({
+				color: this.colores[2], 
+				flatShading: true
+			}),
+			new THREE.MeshLambertMaterial({
+				color: this.colores[3], 
+				flatShading: true
+			}),
+			new THREE.MeshLambertMaterial({
+				color: this.colores[4], 
+				flatShading: true
+			}),
+			new THREE.MeshLambertMaterial({
+				color: this.colores[5], 
+				flatShading: true
+			})
+		]);
+		for (let i = 0; i < 27; i++){
 			let cubie = new THREE.Mesh(geometry, material);
 			this.cubies[i] = new THREE.Mesh(geometry, material);
 			this.cubiegroup.add(this.cubies[i]);
-		}*/
+		}
+		/*
 		for (let i = 0; i < 9; i++){
 			let cubie = new THREE.Mesh(geometry, material);
 			this.cubies[i] = new THREE.Mesh(geometry, material);
@@ -85,7 +112,7 @@ class Cubo extends THREE.Mesh {
 			let cubie = new THREE.Mesh(geometry, material);
 			this.cubies[i] = new THREE.Mesh(geometry, material);
 			this.cubiegroup.add(this.cubies[i]);
-		}
+		}*/
 	}
 
 	setColors(){
