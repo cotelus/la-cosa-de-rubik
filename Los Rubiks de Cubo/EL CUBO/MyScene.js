@@ -54,7 +54,7 @@ class MyScene extends THREE.Scene {
     // En este caso la intensidad de la luz y si se muestran o no los ejes
     this.guiControls = new function() {
       // En el contexto de una función   this   alude a la función
-      this.lightIntensity = 1.0;
+      this.lightIntensity = 0.9;
       this.axisOnOff = true;
       this.flatShading = true;
     }
@@ -78,7 +78,7 @@ class MyScene extends THREE.Scene {
     // La luz ambiental solo tiene un color y una intensidad
     // Se declara como   var   y va a ser una variable local a este método
     //    se hace así puesto que no va a ser accedida desde otros métodos
-    var ambientLight = new THREE.AmbientLight(0xcdeeee, 0.35);
+    var ambientLight = new THREE.AmbientLight(0xfefefe, 0.30);
     // La añadimos a la escena
     this.add (ambientLight);
     

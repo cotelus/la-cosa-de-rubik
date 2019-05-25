@@ -10,6 +10,9 @@ class Cubo extends THREE.Mesh {
 		this.colores = [];
 		this.setColors();
 
+		this.coloresMateriales = [];
+		this.setColoresMateriales();
+
 
 		this.cubeDim = 3;
 
@@ -52,67 +55,131 @@ class Cubo extends THREE.Mesh {
 	}
 
 	makeCubies(){
-		let geometry = new THREE.BoxGeometry(this.cubeDim - 0.05, this.cubeDim - 0.05, this.cubeDim - 0.05);
+		let geometry = new THREE.BoxGeometry(this.cubeDim - 0.1, this.cubeDim - 0.1, this.cubeDim - 0.1);
 		//let material = new THREE.MeshNormalMaterial();
 		/*let material = new THREE.MeshLambertMaterial({
 			color: this.colores[0],
 			flatShading: false,
 		});*/
-		let material = new THREE.MeshFaceMaterial([
-			new THREE.MeshLambertMaterial({
-				color: this.colores[0], 
-				flatShading: true
-			}),
-			new THREE.MeshLambertMaterial({
-				color: this.colores[1], 
-				flatShading: true
-			}),
-			new THREE.MeshLambertMaterial({
-				color: this.colores[2], 
-				flatShading: true
-			}),
-			new THREE.MeshLambertMaterial({
-				color: this.colores[3], 
-				flatShading: true
-			}),
-			new THREE.MeshLambertMaterial({
-				color: this.colores[4], 
-				flatShading: true
-			}),
-			new THREE.MeshLambertMaterial({
-				color: this.colores[5], 
-				flatShading: true
-			})
-		]);
-		for (let i = 0; i < 27; i++){
-			let cubie = new THREE.Mesh(geometry, material);
-			this.cubies[i] = new THREE.Mesh(geometry, material);
-			this.cubiegroup.add(this.cubies[i]);
-		}
 		/*
-		for (let i = 0; i < 9; i++){
-			let cubie = new THREE.Mesh(geometry, material);
-			this.cubies[i] = new THREE.Mesh(geometry, material);
-			this.cubiegroup.add(this.cubies[i]);
-		}
-		material = new THREE.MeshLambertMaterial({
-			color: this.colores[1],
-			flatShading: false,
-		});
-		for (let i = 9; i < 18; i++){
-			let cubie = new THREE.Mesh(geometry, material);
-			this.cubies[i] = new THREE.Mesh(geometry, material);
-			this.cubiegroup.add(this.cubies[i]);
-		}
-		material = new THREE.MeshLambertMaterial({
-			color: this.colores[2],
-			flatShading: false,
-		});
-		for (let i = 18; i < 27; i++){
-			let cubie = new THREE.Mesh(geometry, material);
-			this.cubies[i] = new THREE.Mesh(geometry, material);
+		for (let i = 0; i < 27; i++){
+			this.cubies[i] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[1],
+				this.coloresMateriales[2], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[5]]);
 			this.cubiegroup.add(this.cubies[i]);
 		}*/
+		
+		// COMO PRUEBA VOY A INICIALIZAR CADA CUBO
+		// CUBO 0
+		this.cubies[0] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[0]);
+		// CUBO 1
+		this.cubies[1] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[1]);
+		// CUBO 2
+		this.cubies[2] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
+			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[2]);
+		// CUBO 3
+		this.cubies[3] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[3]);
+		// CUBO 4
+		this.cubies[4] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[4]);
+		// CUBO 5
+		this.cubies[5] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
+			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[5]);
+		// CUBO 6
+		this.cubies[6] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
+			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[6]);
+		// CUBO 7
+		this.cubies[7] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
+			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[7]);
+		// CUBO 8
+		this.cubies[8] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
+			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[8]);
+
+		// CUBO 9
+		this.cubies[9] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[9]);
+		// CUBO 10
+		this.cubies[10] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[10]);
+		// CUBO 11
+		this.cubies[11] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
+			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[11]);
+		// CUBO 12
+		this.cubies[12] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[12]);
+		// CUBO 13
+		this.cubies[13] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[13]);
+		// CUBO 14
+		this.cubies[14] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
+			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[14]);
+		// CUBO 15
+		this.cubies[15] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
+			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[15]);
+		// CUBO 16
+		this.cubies[16] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
+			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[16]);
+		// CUBO 17
+		this.cubies[17] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
+			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
+		this.cubiegroup.add(this.cubies[17]);
+
+		// CUBO 18
+		this.cubies[18] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[5]]);
+		this.cubiegroup.add(this.cubies[18]);
+		// CUBO 19
+		this.cubies[19] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[5]]);
+		this.cubiegroup.add(this.cubies[19]);
+		// CUBO 20
+		this.cubies[20] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
+			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[5]]);
+		this.cubiegroup.add(this.cubies[20]);
+		// CUBO 21
+		this.cubies[21] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
+		this.cubiegroup.add(this.cubies[21]);
+		// CUBO 22
+		this.cubies[22] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
+			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
+		this.cubiegroup.add(this.cubies[22]);
+		// CUBO 23
+		this.cubies[23] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
+			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
+		this.cubiegroup.add(this.cubies[23]);
+		// CUBO 24
+		this.cubies[24] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
+			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
+		this.cubiegroup.add(this.cubies[24]);
+		// CUBO 25
+		this.cubies[25] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
+			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
+		this.cubiegroup.add(this.cubies[25]);
+		// CUBO 26
+		this.cubies[26] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
+			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
+		this.cubiegroup.add(this.cubies[26]);
+
 	}
 
 	setColors(){
@@ -124,10 +191,56 @@ class Cubo extends THREE.Mesh {
 		this.colores[2] = 0x0000FF;
 		// AMARILLO
 		this.colores[3] = 0xFFFF00;
-		// VIOLETA
-		this.colores[4] = 0xFF00FF;
 		// BLANCO
-		this.colores[5] = 0xFFFFFF;
+		this.colores[4] = 0xFFFFFF;
+		// VIOLETA
+		this.colores[5] = 0xFF00FF;
+		// NEGRO
+		this.colores[6] = 0x000000;
+	}
+
+	setColoresMateriales(){
+		// Material ROJO
+		this.coloresMateriales[0] = new THREE.MeshLambertMaterial({
+			color: this.colores[0],
+			flatShading: false,
+		});
+
+		// Material VERDE
+		this.coloresMateriales[1] = new THREE.MeshLambertMaterial({
+			color: this.colores[1],
+			flatShading: false,
+		});
+
+		// Material AZUL
+		this.coloresMateriales[2] = new THREE.MeshLambertMaterial({
+			color: this.colores[2],
+			flatShading: false,
+		});
+
+		// Material AMARILLO
+		this.coloresMateriales[3] = new THREE.MeshLambertMaterial({
+			color: this.colores[3],
+			flatShading: false,
+		});
+
+		// Material BLANCO
+		this.coloresMateriales[4] = new THREE.MeshLambertMaterial({
+			color: this.colores[4],
+			flatShading: false,
+		});
+
+		// Material VIOLETA
+		this.coloresMateriales[5] = new THREE.MeshLambertMaterial({
+			color: this.colores[5],
+			flatShading: false,
+		});
+
+		// Material NEGRO
+		this.coloresMateriales[6] = new THREE.MeshLambertMaterial({
+			color: this.colores[6],
+			flatShading: false,
+		});
 
 	}
 
