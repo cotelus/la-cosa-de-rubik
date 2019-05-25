@@ -55,7 +55,7 @@ function onWindowResize () {
 
 // Función que rota el objeto en función del ratón
 function mouseMove(event){
-
+  /*
   if (typeof(lastMPos.x) != 'undefined'){
       var deltaX = lastMPos.x - event.clientX,
           deltaY = lastMPos.y - event.clientY;
@@ -66,7 +66,7 @@ function mouseMove(event){
   lastMPos = {
     x : event.clientX,
     y : event.clientY
-  };
+  };*/
 
 }
 
@@ -84,7 +84,7 @@ $(function () {
   document.addEventListener("mousemove", mouseMove);
   
   // Se crea una interfaz gráfica de usuario vacia
-  gui = new dat.GUI();
+  //gui = new dat.GUI();
   
   // Se crea la escena. La escena es una instancia de nuestra propia clase encargada de crear y gestionar todos los elementos que intervienen en la escena.
   scene = new MyScene (renderer.domElement);

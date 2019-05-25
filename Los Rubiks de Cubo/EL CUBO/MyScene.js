@@ -9,9 +9,6 @@ class MyScene extends THREE.Scene {
   constructor (unRenderer) {
     super();
     
-    // Se añade a la gui los controles para manipular los elementos de esta clase
-    this.createGUI ();
-    
     // Construimos los distinos elementos que tendremos en la escena
     
     // Todo elemento que se desee sea tenido en cuenta en el renderizado de la escena debe pertenecer a esta. Bien como hijo de la escena (this en esta clase) o como hijo de un elemento que ya esté en la escena.
@@ -20,18 +17,6 @@ class MyScene extends THREE.Scene {
     
     // Tendremos una cámara con un control de movimiento con el ratón
     this.createCamera (unRenderer);
-    
-    // Un suelo 
-    //this.createGround ();
-    
-    // Y unos ejes. Imprescindibles para orientarnos sobre dónde están las cosas
-    //this.axisCubo = new THREE.AxesHelper (5);
-    //this.add (this.axisCubo);
-    
-    
-    // Por último creamos la caja del ejemplo, como una instancia de una clase propia, que gestionará su creación y la interacción con la misma
-    //this.caja = new MyBox();
-    //this.add (this.caja);
 
     this.cubo = new Cubo();
     this.add (this.cubo);
@@ -61,44 +46,11 @@ class MyScene extends THREE.Scene {
     this.cameraControl.target = look;
   }
   
-  createGround () {
-    // Una figura es un Mesh
-    var ground = new THREE.Mesh ();
-    // Un Mesh se compone de geometría y material
-    ground.geometry = new THREE.BoxGeometry (50,0.2,50);
-    // Las primitivas básicas se crean centradas en el origen
-    // Se puede modificar su posición con respecto al sistema de coordenadas local con una transformación aplicada directamente a la geometría.
-    ground.geometry.applyMatrix (new THREE.Matrix4().makeTranslation(0,-0.1,0));
-    // Como material se crea uno a partir de una textura
-    var texture = new THREE.TextureLoader().load('../imgs/wood.jpg');
-    ground.material = new THREE.MeshPhongMaterial ({map: texture});
-    // Por último se añade el suelo a la escena
-    ground.receiveShadow = true;
-    this.add (ground);
-  }
-  
-  createGUI () {
-    // Se definen los controles que se modificarán desde la GUI
-    // En este caso la intensidad de la luz y si se muestran o no los ejes
-    this.guiControls = new function() {
-      // En el contexto de una función   this   alude a la función
-      this.lightIntensity = 0.5;
-      this.axisOnOff = true;
-      this.flatShading = true;
-    }
 
-    // Accedemos a la variable global   gui   declarada en   script.js   para añadirle la parte de interfaz que corresponde a los elementos de esta clase
-    
-    // Se crea una sección para los controles de esta clase
-    //var folder = gui.addFolder ('Luz y Ejes');
-    
-    // Se le añade un control para la intensidad de la luz
-    //folder.add (this.guiControls, 'lightIntensity', 0, 1, 0.1).name('Intensidad de la Luz : ');
-    
-    // Y otro para mostrar u ocultar los ejes
-    //folder.add (this.guiControls, 'axisOnOff').name ('Mostrar ejes : ');
+  /* Esta función es la que se va a encargar de 
+  */
+  rotateRubik(){
 
-    //folder.add (this.guiControls, 'flatShading').name('Sombreado: ');
   }
   
   createLights () {
@@ -114,7 +66,7 @@ class MyScene extends THREE.Scene {
     // La luz focal, además tiene una posición, y un punto de mira
     // Si no se le da punto de mira, apuntará al (0,0,0) en coordenadas del mundo
     // En este caso se declara como   this.atributo   para que sea un atributo accesible desde otros métodos.
-    this.spotLight = new THREE.SpotLight( 0xffffff, this.guiControls.lightIntensity );
+    this.spotLight = new THREE.SpotLight( 0xffffff, 3.0 );
     this.spotLight.position.set( 20, 60, 40 );
     this.spotLight.castShadow = true;
     this.add (this.spotLight);
@@ -133,20 +85,5 @@ class MyScene extends THREE.Scene {
   
   update () {
     // Se actualizan los elementos de la escena para cada frame
-    // Se actualiza la intensidad de la luz con lo que haya indicado el usuario en la gui
-    //this.spotLight.intensity = this.guiControls.lightIntensity;
-    
-    // Se muestran o no los ejes según lo que idique la GUI
-    //this.axisCubo.visible = this.guiControls.axisOnOff;
-
-    //Se actualiza el sombreado
-    //this.caja.material.flatShading = this.guiControls.flatShading;
-    
-    // Se actualiza la posición de la cámara según su controlador
-    //this.cameraControl.update();
-    
-    // Se actualiza el resto del modelo
-    //this.caja.update();
-    //this.caja.update();
   }
 }

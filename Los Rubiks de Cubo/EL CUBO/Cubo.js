@@ -4,9 +4,6 @@ class Cubo extends THREE.Mesh {
 	constructor(){
 		super();
 
-		this.createGUI();
-
-
 		this.cubeDim = 3;
 
 		this.cubePositions = [];
@@ -64,10 +61,6 @@ class Cubo extends THREE.Mesh {
 			this.cubies[i].position.z = this.cubePositions[i][2];
 
 		}
-	}
-
-	createGUI(){
-
 	}
 
 	update(){
