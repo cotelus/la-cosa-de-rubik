@@ -287,23 +287,6 @@ class Cubo2x2x2 extends THREE.Mesh {
 		}
 		
 
-		if(controlGiro > 610){
-			/*
-			var pivot = new THREE.Group();
-			this.add( pivot );
-			pivot.add( this.cubies[2] );
-			pivot.add( this.cubies[3] );
-			pivot.add( this.cubies[6] );
-			pivot.add( this.cubies[7] );
-
-			pivot.rotation.y = 2*Math.PI/4;
-			*/
-
-			//controlGiro = 0;
-			//multGiro ++;
-
-		}
-
 		controlGiro++;
 	}
 
