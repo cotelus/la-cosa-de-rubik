@@ -29,6 +29,12 @@ class Cubo extends THREE.Mesh {
 		this.mesh3 = new THREE.Mesh();
 		this.mesh4 = new THREE.Mesh();
 
+		this.cubo = new THREE.Group();
+		this.cubo.add(this.mesh1);
+		this.cubo.add(this.mesh2);
+		this.cubo.add(this.mesh3);
+		this.cubo.add(this.mesh4);
+
 		this.cubies = [];
 
 		this.makeCubies();
@@ -38,10 +44,11 @@ class Cubo extends THREE.Mesh {
 
 
 		//this.add(this.cubiegroup);
-		this.add(this.mesh1);
+		/*this.add(this.mesh1);
 		this.add(this.mesh2);
 		this.add(this.mesh3);
-		this.add(this.mesh4);
+		this.add(this.mesh4);*/
+		this.add(this.cubo);
 	}
 
 	/*
