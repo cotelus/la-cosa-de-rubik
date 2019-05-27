@@ -1,4 +1,4 @@
-
+controlGiro = 0;
 class Cubo2x2x2 extends THREE.Mesh {
 
 	constructor(){
@@ -73,7 +73,7 @@ class Cubo2x2x2 extends THREE.Mesh {
 		for(let z = 1; z >= 0; z--){
 			for (let y = 0; y <= 1; y++){
 				for (let x = 1; x >= 0; x--){
-					this.cubePositions.push([x * this.cubeDim, y * this.cubeDim, z * this.cubeDim]);
+					this.cubePositions.push([(x * this.cubeDim) - this.cubeDim/2, (y * this.cubeDim) - this.cubeDim/2, (z * this.cubeDim) - this.cubeDim/2]);
 					cont++;
 				}
 			}
@@ -128,6 +128,29 @@ class Cubo2x2x2 extends THREE.Mesh {
 		this.cubies[7] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
 			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
 		this.mesh1.add(this.cubies[7]);
+
+
+		// ESTO SON PRUEBAS SOBRE LOS GIROS DE LAS CARAS
+		/*
+		var axis = new THREE.Vector3(0.0,1.0,0.0);
+
+		this.cubies[0].applyAxisAngle (axis, Math.PI/4);
+		this.cubies[1].applyAxisAngle (axis, Math.PI/4);
+		this.cubies[4].applyAxisAngle (axis, Math.PI/4);
+		this.cubies[5].applyAxisAngle (axis, Math.PI/4);
+		*/
+
+		/*
+		var pivot = new THREE.Group();
+		this.add( pivot );
+		pivot.add( this.cubies[0] );
+		pivot.add( this.cubies[1] );
+		pivot.add( this.cubies[4] );
+		pivot.add( this.cubies[5] );
+
+		pivot.rotation.y = 2*Math.PI/4;
+		*/
+
 
 
 	}
@@ -227,6 +250,46 @@ class Cubo2x2x2 extends THREE.Mesh {
 		//this.cubiegroup.rotation.y = this.guiControls.rotacionY;
 		//this.cubiegroup.rotation.z = this.guiControls.rotacionZ;
 		//this.rotategroup.rotation.z = this.guiControls.rotacionY;
+
+		if(controlGiro == 200){
+
+			var pivot = new THREE.Group();
+			this.add( pivot );
+			pivot.add( this.cubies[0] );
+			pivot.add( this.cubies[1] );
+			pivot.add( this.cubies[4] );
+			pivot.add( this.cubies[5] );
+
+			pivot.rotation.y = Math.PI/4;
+		}
+
+		if(controlGiro == 300){
+
+			var pivot = new THREE.Group();
+			this.add( pivot );
+			pivot.add( this.cubies[0] );
+			pivot.add( this.cubies[1] );
+			pivot.add( this.cubies[4] );
+			pivot.add( this.cubies[5] );
+
+			pivot.rotation.y = 2*Math.PI/4;
+		}
+
+		if(controlGiro > 400){
+			var pivot = new THREE.Group();
+			this.add( pivot );
+			pivot.add( this.cubies[2] );
+			pivot.add( this.cubies[3] );
+			pivot.add( this.cubies[6] );
+			pivot.add( this.cubies[7] );
+
+			pivot.rotation.y = 2*Math.PI/4;
+
+			controlGiro = 0;
+
+		}
+
+		controlGiro++;
 	}
 
 }
