@@ -21,7 +21,14 @@ class MyScene extends THREE.Scene {
     // Tendremos una cámara con un control de movimiento con el ratón
     this.createCamera (unRenderer);
 
+    /* 
+    // Esto crea el cubo 3x3x3 
     this.cubo = new Cubo();
+    this.add (this.cubo);
+    */
+
+    // Esto crea el cubo 2x2x2 
+    this.cubo = new Cubo2x2x2();
     this.add (this.cubo);
 
   }

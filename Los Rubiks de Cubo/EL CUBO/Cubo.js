@@ -84,7 +84,7 @@ class Cubo extends THREE.Mesh {
 			this.cubiegroup.add(this.cubies[i]);
 		}*/
 		
-		// COMO PRUEBA VOY A INICIALIZAR CADA CUBO
+		// Se inicializa cada cubito del Cubo de Rubik
 		// CUBO 0
 		this.cubies[0] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
 			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
