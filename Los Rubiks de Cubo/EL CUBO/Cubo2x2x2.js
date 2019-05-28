@@ -52,6 +52,8 @@ class Cubo2x2x2 extends THREE.Mesh {
 		for (let i = 0; i < 8; i++){
 			this.add(this.cubies[i]);
 		}
+
+		this.posiciones = [5,1,0,4];
 		
 	}
 
@@ -204,6 +206,19 @@ class Cubo2x2x2 extends THREE.Mesh {
 		}
 	}
 
+	// Cambia las posiciones del vector cubePositions respecto a la rotación de la cara 
+	changePositions(positions){
+		var cubitos = this.cubies;
+		var aux = cubitos[positions[0]];
+		for (let i = 0; i < 4; i++){
+			if (i != 3)
+				this.cubies[positions[i]] = cubitos[positions[i+1]];
+			else
+				this.cubies[positions[i]] = aux;
+		}
+
+	}
+
 	createGUI () {
 		// Controles para el movimiento de la parte móvil
 		this.guiControls = new function () {
@@ -272,7 +287,7 @@ class Cubo2x2x2 extends THREE.Mesh {
 			this.cubies[1].applyMatrix(matrix);
 			this.cubies[4].applyMatrix(matrix);
 			this.cubies[5].applyMatrix(matrix);
-			
+			this.changePositions(this.posiciones);
 
 			/*
 			var axis = new THREE.Vector3(0.0,1.0,0.0);
@@ -302,19 +317,13 @@ class Cubo2x2x2 extends THREE.Mesh {
 			//Create a matrix
 			var matrix = new THREE.Matrix4();
 			//Rotate the matrix
-			matrix.makeRotationX(Math.PI / 2);
+			matrix.makeRotationY(Math.PI / 2);
 
-			//rotate the object using the matrix
-			this.cubies[1].position.applyMatrix4(matrix);
-			this.cubies[2].position.applyMatrix4(matrix);
-			this.cubies[0].position.applyMatrix4(matrix);
-			this.cubies[6].position.applyMatrix4(matrix);
-			this.cubies[1].rotation.x = Math.PI / 2;
-			this.cubies[2].rotation.x = Math.PI / 2;
-			this.cubies[0].rotation.x = Math.PI / 2;
-			this.cubies[6].rotation.x = Math.PI / 2;
+			this.cubies[0].applyMatrix(matrix);
+			this.cubies[1].applyMatrix(matrix);
+			this.cubies[4].applyMatrix(matrix);
+			this.cubies[5].applyMatrix(matrix);
 		}
-		
 
 		controlGiro++;
 	}
