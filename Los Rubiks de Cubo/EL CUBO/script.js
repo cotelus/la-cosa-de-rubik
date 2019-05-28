@@ -10,6 +10,12 @@ renderer = null;
 gui = null;
 
 var lastMPos = {};
+var isDragging = false;
+var originalRotation = {
+	x : 0,
+	y : 0,
+	z : 0
+};
 
 /// Se crea y configura un renderer WebGL
 /**
@@ -55,19 +61,34 @@ function onWindowResize () {
 
 // Función que rota el objeto en función del ratón
 function mouseMove(event){
-  /*
-  if (typeof(lastMPos.x) != 'undefined'){
-      var deltaX = lastMPos.x - event.clientX,
-          deltaY = lastMPos.y - event.clientY;
+  if (isDragging){
+	  if (typeof(lastMPos.x) != 'undefined'){
+	      var deltaX = lastMPos.x - event.clientX,
+	          deltaY = lastMPos.y - event.clientY;
 
-      scene.cubo.rotation.y -= deltaX * 0.005;
-      scene.cubo.rotation.x -= deltaY * 0.01;
-  }
-  lastMPos = {
-    x : event.clientX,
-    y : event.clientY
-  };*/
+	      scene.cubo.rotation.y -= deltaX * 0.005;
+	      scene.cubo.rotation.x -= deltaY * 0.01;
+	  }
+	  lastMPos = {
+	    x : event.clientX,
+	    y : event.clientY
+	  };
+	} 
+}
 
+function mouseDown(event){
+	isDragging = true;
+	lastMPos = {
+	    x : event.clientX,
+	    y : event.clientY
+	  };
+}
+
+function mouseUp(event){
+	isDragging = false;
+	scene.cubo.rotation.x = originalRotation.x;
+	scene.cubo.rotation.y = originalRotation.y;
+	scene.cubo.rotation.z = originalRotation.z;
 }
 
 /// La función principal
@@ -81,7 +102,9 @@ $(function () {
   // listeners
   // Cada vez que el usuario cambie el tamaño de la ventana se llama a la función que actualiza la cámara y el renderer
   window.addEventListener ("resize", onWindowResize);
-  document.addEventListener("mousemove", mouseMove);
+  document.addEventListener('mousemove', mouseMove, false);
+  document.addEventListener('pointerup', mouseUp, false);
+  document.addEventListener('pointerdown', mouseDown, false);
   
   // Se crea una interfaz gráfica de usuario vacia
   gui = new dat.GUI();

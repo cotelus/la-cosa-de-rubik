@@ -200,8 +200,8 @@ class Cubo2x2x2 extends THREE.Mesh {
 		// Se crea una sección para los controles de la caja
 		var folder = gui.addFolder ('Controles del cubo');
 		// Hay que cambiar el Math.PI/4 por Math.PI/2 cuando se haga la rotación bien
-		folder.add (this.guiControls, 'rotacionY', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Y : ').listen();
-		folder.add (this.guiControls, 'rotacionZ', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Z : ').listen();
+		//folder.add (this.guiControls, 'rotacionY', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Y : ').listen();
+		//folder.add (this.guiControls, 'rotacionZ', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Z : ').listen();
 
 		// Controles para los giros de las caras
 		folder.add (this.guiControls, 'giroSeccionX1', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec X1: ').listen();
@@ -332,7 +332,7 @@ class Cubo2x2x2 extends THREE.Mesh {
 
 	update(){
 		// Esta función rota todo el objeto sobre todos los ejes
-		this.rotation.set (0.0, this.guiControls.rotacionY, this.guiControls.rotacionZ);
+		//this.rotation.set (0.0, this.guiControls.rotacionY, this.guiControls.rotacionZ);
 
 		this.decideGiros();
 
