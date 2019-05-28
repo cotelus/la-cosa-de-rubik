@@ -62,7 +62,7 @@ class Cubo2x2x2 extends THREE.Mesh {
 	*/
 
 	getCubePositions(){
-		// Cambio respecto la versión 3x3x3 las posiciones de los cubos restandole dim/2 a cada coordenada
+		// Cambio respecto la versión 3x3x3 las posiciones de los cubos restandole dim/2 a cada coordenada. Ayuda al posicionamiento en el centro
 		let cont = 0;
 		for(let z = 1; z >= 0; z--){
 			for (let y = 0; y <= 1; y++){
@@ -88,6 +88,7 @@ class Cubo2x2x2 extends THREE.Mesh {
 				this.coloresMateriales[2], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[5]]);
 			this.cubiegroup.add(this.cubies[i]);
 		}*/
+		
 		
 		// COMO PRUEBA VOY A INICIALIZAR CADA CUBO
 		// CUBO 0
@@ -186,11 +187,19 @@ class Cubo2x2x2 extends THREE.Mesh {
 
 	}
 
+	// Establece la posición de cada cubo con la matriz transformacion TRANSLATE
 	setCubies(){
 		for (let i = 0; i < 8; i++){
+			/* 
 			this.cubies[i].position.x = this.cubePositions[i][0];
 			this.cubies[i].position.y = this.cubePositions[i][1];
 			this.cubies[i].position.z = this.cubePositions[i][2];
+			*/
+			/* Método obsoleto, lo dejo como referencia 
+			this.cubies[i].translate(this.cubePositions[i][0], this.cubePositions[i][1], this.cubePositions[i][2] );
+			*/
+
+			this.cubies[i].applyMatrix (new THREE.Matrix4().makeTranslation(this.cubePositions[i][0],this.cubePositions[i][1],this.cubePositions[i][2]));
 
 		}
 	}
@@ -238,22 +247,42 @@ class Cubo2x2x2 extends THREE.Mesh {
 
 
 			
+			
 			//Create a matrix
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
 			matrix.makeRotationY(Math.PI / 2);
 
-
+			/*
 			// Rota el objeto ( en realidad no lo rota, lo cambia de posición )
 			this.cubies[0].position.applyMatrix4(matrix);
 			this.cubies[1].position.applyMatrix4(matrix);
 			this.cubies[4].position.applyMatrix4(matrix);
 			this.cubies[5].position.applyMatrix4(matrix);
 			// Rota el objeto respecto su eje local
+			
 			this.cubies[0].rotation.y = Math.PI / 2;
 			this.cubies[1].rotation.y = Math.PI / 2;
 			this.cubies[4].rotation.y = Math.PI / 2;
-			this.cubies[5].rotation.y = Math.PI / 2;		
+			this.cubies[5].rotation.y = Math.PI / 2;	
+			*/
+		
+			
+			this.cubies[0].applyMatrix(matrix);
+			this.cubies[1].applyMatrix(matrix);
+			this.cubies[4].applyMatrix(matrix);
+			this.cubies[5].applyMatrix(matrix);
+			
+
+			/*
+			var axis = new THREE.Vector3(0.0,1.0,0.0);
+
+			this.cubies[0].rotateOnWorldAxis(axis, Math.PI/2);
+			this.cubies[1].rotateOnWorldAxis(axis, Math.PI/2);
+			this.cubies[4].rotateOnWorldAxis(axis, Math.PI/2);
+			this.cubies[5].rotateOnWorldAxis(axis, Math.PI/2);
+			*/
+			
 
 		}
 
