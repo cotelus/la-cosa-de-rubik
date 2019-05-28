@@ -208,6 +208,7 @@ class Cubo2x2x2 extends THREE.Mesh {
 
 	// Cambia las posiciones del vector cubePositions respecto a la rotación de la cara 
 	changePositions(positions){
+		/*
 		var cubitos = this.cubies;
 		var aux = cubitos[positions[0]];
 		for (let i = 0; i < 4; i++){
@@ -216,6 +217,12 @@ class Cubo2x2x2 extends THREE.Mesh {
 			else
 				this.cubies[positions[i]] = aux;
 		}
+		*/
+		var aux = this.cubies[positions[0]];
+		for(let i = 0; i < 3; i++){
+			this.cubies[positions[i]] = this.cubies[positions[i+1]]; 
+		}
+		this.cubies[positions[3]] = aux; 
 
 	}
 
@@ -245,84 +252,43 @@ class Cubo2x2x2 extends THREE.Mesh {
 		//this.rotategroup.rotation.z = this.guiControls.rotacionY;
 
 		if(controlGiro == 200){
-
-			/*
-			var pivot = new THREE.Group();
-			this.add( pivot );
-			pivot.add( this.cubies[0] );
-			pivot.add( this.cubies[1] );
-			pivot.add( this.cubies[4] );
-			pivot.add( this.cubies[5] );
-
-			var axis = new THREE.Vector3(0.0,1.0,0.0);*/
+			// Hay que almacenar las posiciones que van a rotar
+			let positions = [0,1,5,4];
+			this.changePositions(positions);
 
 
-			//pivot.rotateOnWorldAxis(axis, multGiro * Math.PI/2);
-			//pivot.rotation.y = 2*Math.PI/4;
-
-
-			
-			
 			//Create a matrix
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
 			matrix.makeRotationY(Math.PI / 2);
-
-			/*
-			// Rota el objeto ( en realidad no lo rota, lo cambia de posición )
-			this.cubies[0].position.applyMatrix4(matrix);
-			this.cubies[1].position.applyMatrix4(matrix);
-			this.cubies[4].position.applyMatrix4(matrix);
-			this.cubies[5].position.applyMatrix4(matrix);
-			// Rota el objeto respecto su eje local
-			
-			this.cubies[0].rotation.y = Math.PI / 2;
-			this.cubies[1].rotation.y = Math.PI / 2;
-			this.cubies[4].rotation.y = Math.PI / 2;
-			this.cubies[5].rotation.y = Math.PI / 2;	
-			*/
-		
 			
 			this.cubies[0].applyMatrix(matrix);
 			this.cubies[1].applyMatrix(matrix);
-			this.cubies[4].applyMatrix(matrix);
 			this.cubies[5].applyMatrix(matrix);
-			this.changePositions(this.posiciones);
-
-			/*
-			var axis = new THREE.Vector3(0.0,1.0,0.0);
-
-			this.cubies[0].rotateOnWorldAxis(axis, Math.PI/2);
-			this.cubies[1].rotateOnWorldAxis(axis, Math.PI/2);
-			this.cubies[4].rotateOnWorldAxis(axis, Math.PI/2);
-			this.cubies[5].rotateOnWorldAxis(axis, Math.PI/2);
-			*/
+			this.cubies[4].applyMatrix(matrix);
 			
 
 		}
 
 		
 		if(controlGiro == 400){
-			/*
-			var pivot = new THREE.Group();
-			this.add( pivot );
-			pivot.add( this.cubies[1] );
-			pivot.add( this.cubies[2] );
-			pivot.add( this.cubies[0] );
-			pivot.add( this.cubies[6] );
 
-			pivot.rotation.x = 2*Math.PI/4;
-			*/
+			let positions = [0,2,6,4];
+			this.changePositions(positions);
 
 			//Create a matrix
 			var matrix = new THREE.Matrix4();
 			//Rotate the matrix
-			matrix.makeRotationY(Math.PI / 2);
+			matrix.makeRotationX(Math.PI / 2);
 
 			this.cubies[0].applyMatrix(matrix);
-			this.cubies[1].applyMatrix(matrix);
+			this.cubies[2].applyMatrix(matrix);
+			this.cubies[6].applyMatrix(matrix);
 			this.cubies[4].applyMatrix(matrix);
-			this.cubies[5].applyMatrix(matrix);
+		}
+
+		if(controlGiro > 410){
+			controlGiro = 0;
 		}
 
 		controlGiro++;
