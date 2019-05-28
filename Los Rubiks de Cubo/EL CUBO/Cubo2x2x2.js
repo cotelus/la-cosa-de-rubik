@@ -15,7 +15,6 @@ class Cubo2x2x2 extends THREE.Mesh {
 		this.coloresMateriales = [];
 		this.setColoresMateriales();
 
-
 		this.cubeDim = 4;
 
 		this.cubePositions = [];
@@ -29,31 +28,11 @@ class Cubo2x2x2 extends THREE.Mesh {
 
 		this.makeCubies();
 
-
 		this.setCubies();
-
-		/*
-		this.pivot = new THREE.Group();
-		for (let i = 0; i < 8; i++){
-			this.pivot.add(this.cubies[i]);
-		}
-		this.add( this.pivot );
-		*/
-
-
-		//this.add(this.cubiegroup);
-		/*this.add(this.mesh1);
-		this.add(this.mesh2);
-		this.add(this.mesh3);
-		this.add(this.mesh4);*/
-		//this.add(this.mesh1);
-
 		
 		for (let i = 0; i < 8; i++){
 			this.add(this.cubies[i]);
 		}
-
-		this.posiciones = [5,1,0,4];
 		
 	}
 
@@ -78,21 +57,9 @@ class Cubo2x2x2 extends THREE.Mesh {
 	}
 
 	makeCubies(){
-		let geometry = new THREE.BoxGeometry(this.cubeDim - 0.1, this.cubeDim - 0.1, this.cubeDim - 0.1);
-		//let material = new THREE.MeshNormalMaterial();
-		/*let material = new THREE.MeshLambertMaterial({
-			color: this.colores[0],
-			flatShading: false,
-		});*/
-		/*
-		for (let i = 0; i < 27; i++){
-			this.cubies[i] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[1],
-				this.coloresMateriales[2], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[5]]);
-			this.cubiegroup.add(this.cubies[i]);
-		}*/
+		let geometry = new THREE.BoxGeometry(this.cubeDim - 0.1, this.cubeDim - 0.1, this.cubeDim - 0.1);		
 		
-		
-		// COMO PRUEBA VOY A INICIALIZAR CADA CUBO
+		// Se inicializa cada cubo con la geometria y colores correspondiente
 		// CUBO 0
 		this.cubies[0] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
 			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
@@ -192,32 +159,19 @@ class Cubo2x2x2 extends THREE.Mesh {
 	// Establece la posición de cada cubo con la matriz transformacion TRANSLATE
 	setCubies(){
 		for (let i = 0; i < 8; i++){
-			/* 
-			this.cubies[i].position.x = this.cubePositions[i][0];
-			this.cubies[i].position.y = this.cubePositions[i][1];
-			this.cubies[i].position.z = this.cubePositions[i][2];
-			*/
-			/* Método obsoleto, lo dejo como referencia 
-			this.cubies[i].translate(this.cubePositions[i][0], this.cubePositions[i][1], this.cubePositions[i][2] );
-			*/
-
-			this.cubies[i].applyMatrix (new THREE.Matrix4().makeTranslation(this.cubePositions[i][0],this.cubePositions[i][1],this.cubePositions[i][2]));
-
+			this.cubies[i].applyMatrix (new THREE.Matrix4().makeTranslation(this.cubePositions[i][0],
+				this.cubePositions[i][1],this.cubePositions[i][2]));
 		}
 	}
 
-	// Cambia las posiciones del vector cubePositions respecto a la rotación de la cara 
+	/*
+	 Cambia las posiciones del vector cubePositions respecto a la rotación de la cara 
+	 IMPORTANTÍSIMO: Hay que pasarle el vector de posiciones que rotan en sentido antihorario
+	 EJEMPLO DE USO: 		let positions = [0,2,6,4];
+							this.changePositions(positions);
+						Rota los cubos 0,2,6,4 en sentido horario (pero se seleccionan en sentido antihorario )
+	*/
 	changePositions(positions){
-		/*
-		var cubitos = this.cubies;
-		var aux = cubitos[positions[0]];
-		for (let i = 0; i < 4; i++){
-			if (i != 3)
-				this.cubies[positions[i]] = cubitos[positions[i+1]];
-			else
-				this.cubies[positions[i]] = aux;
-		}
-		*/
 		var aux = this.cubies[positions[0]];
 		for(let i = 0; i < 3; i++){
 			this.cubies[positions[i]] = this.cubies[positions[i+1]]; 
@@ -235,8 +189,6 @@ class Cubo2x2x2 extends THREE.Mesh {
 		
 		// Se crea una sección para los controles de la caja
 		var folder = gui.addFolder ('Controles del cubo');
-		// Estas lineas son las que añaden los componentes de la interfaz
-		// Las tres cifras indican un valor mínimo, un máximo y el incremento
 		// Hay que cambiar el Math.PI/4 por Math.PI/2 cuando se haga la rotación bien
 		folder.add (this.guiControls, 'rotacionY', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Y : ').listen();
 		folder.add (this.guiControls, 'rotacionZ', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Z : ').listen();
@@ -246,16 +198,11 @@ class Cubo2x2x2 extends THREE.Mesh {
 		// Esta función rota todo el objeto sobre todos los ejes
 		this.rotation.set (0.0, this.guiControls.rotacionY, this.guiControls.rotacionZ);
 
-		// Esta rotación, eliges qué rotar y sobre qué eje
-		//this.cubiegroup.rotation.y = this.guiControls.rotacionY;
-		//this.cubiegroup.rotation.z = this.guiControls.rotacionZ;
-		//this.rotategroup.rotation.z = this.guiControls.rotacionY;
-
-		if(controlGiro == 200){
+		// Esto es una animación básica para comprobar los giros
+		if(controlGiro == 50){
 			// Hay que almacenar las posiciones que van a rotar
 			let positions = [0,1,5,4];
 			this.changePositions(positions);
-
 
 			//Create a matrix
 			var matrix = new THREE.Matrix4();
@@ -271,7 +218,7 @@ class Cubo2x2x2 extends THREE.Mesh {
 		}
 
 		
-		if(controlGiro == 400){
+		if(controlGiro == 100){
 
 			let positions = [0,2,6,4];
 			this.changePositions(positions);
@@ -287,7 +234,7 @@ class Cubo2x2x2 extends THREE.Mesh {
 			this.cubies[4].applyMatrix(matrix);
 		}
 
-		if(controlGiro > 410){
+		if(controlGiro > 101){
 			controlGiro = 0;
 		}
 
