@@ -77,18 +77,22 @@ function mouseMove(event){
 }
 
 function mouseDown(event){
-	isDragging = true;
-	lastMPos = {
-	    x : event.clientX,
-	    y : event.clientY
-	  };
+  if (event.which == 3){
+  	isDragging = true;
+  	lastMPos = {
+  	    x : event.clientX,
+  	    y : event.clientY
+  	  };
+  }
 }
 
 function mouseUp(event){
-	isDragging = false;
-	scene.cubo.rotation.x = originalRotation.x;
-	scene.cubo.rotation.y = originalRotation.y;
-	scene.cubo.rotation.z = originalRotation.z;
+  if (event.which == 3){
+  	isDragging = false;
+  	scene.cubo.rotation.x = originalRotation.x;
+  	scene.cubo.rotation.y = originalRotation.y;
+  	scene.cubo.rotation.z = originalRotation.z;
+  }
 }
 
 /// La función principal
