@@ -22,6 +22,9 @@ Cuando hayas empezado el cubo, es fácil saber si se ha resuelto. Solo hay que c
 Otra forma de hacerlo, seria crear la clase Cubito, a la que le pasas una posición inicial y una serie de colores. Ese objeto lo vas a usar de la misma forma que los cubies, pero además va a almacenar su posición inicial tambien, por lo que la comprobación es tan sencilla como llamar a todos los cubies y preguntarles si estan en su posición inicial ( inicial y actual coinciden ) Y aquí ya no hace falta ningun tipo de interacción mas por parte del usuario mas que pulsar el botón para comprobar que rula.
 O ni eso, pasarle su indice original y que la comprobación en realidad compruebe si su indice actual en los cubies y su indice inicial que se le pasó en la creación es el mismo
 
+## 3.- Botón que desordene el cubo
+Conforme lo pulsas, hace RANDOM rotaciones de RANDOM' caras. Lo mas sencillo quizás
+
 
 
 
