@@ -14,7 +14,6 @@ class Cubo extends THREE.Mesh {
 		this.coloresMateriales = [];
 		this.setColoresMateriales();
 		this.mouseUp = false;
-		this.rotating = false;
 
 		this.cubeDim = 3;
 
@@ -34,7 +33,14 @@ class Cubo extends THREE.Mesh {
 		}
 
 		this.controlSecX1 = 0.0;
+		this.controlSecX2 = 0.0;
+		this.controlSecX3 = 0.0;
 		this.controlSecY1 = 0.0;
+		this.controlSecY2 = 0.0;
+		this.controlSecY3 = 0.0;
+		this.controlSecZ1 = 0.0;
+		this.controlSecZ2 = 0.0;
+		this.controlSecZ3 = 0.0;
 
 	}
 
@@ -247,8 +253,8 @@ class Cubo extends THREE.Mesh {
 	// Función encargada de mostrar los controles de la interfaz
 	createGUI () {
 		this.guiControls = new function () {
-			this.rotacionY = 0.0;
-			this.rotacionZ = 0.0;
+			//this.rotacionY = 0.0;
+			//this.rotacionZ = 0.0;
 
 			// Giros de las distintas caras
 			this.giroSeccionX1 = 0.0;
@@ -270,17 +276,15 @@ class Cubo extends THREE.Mesh {
 		//folder.add (this.guiControls, 'rotacionY', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Y : ').listen();
 		//folder.add (this.guiControls, 'rotacionZ', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Z : ').listen();
 		
-		// CAMBIO ESTE
-		folder.add (this.guiControls, 'giroSeccionX1', 0.0, 90.0, 9.0).name ('Giro Sec X1: ').listen();
-		folder.add (this.guiControls, 'giroSeccionX2', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec X2: ').listen();
-		folder.add (this.guiControls, 'giroSeccionX3', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec X3: ').listen();
-		// Y ESTE
-		folder.add (this.guiControls, 'giroSeccionY1', 0.0, 90.0, 9.0).name ('Giro Sec Y1: ').listen();
-		folder.add (this.guiControls, 'giroSeccionY2', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec Y2: ').listen();
-		folder.add (this.guiControls, 'giroSeccionY3', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec Y3: ').listen();
-		folder.add (this.guiControls, 'giroSeccionZ1', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec Z1: ').listen();
-		folder.add (this.guiControls, 'giroSeccionZ2', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec Z2: ').listen();
-		folder.add (this.guiControls, 'giroSeccionZ3', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec Z3: ').listen();
+		folder.add (this.guiControls, 'giroSeccionX1', 0.0, 90.0, 1.0).name ('Giro Sec X1: ').listen();
+		folder.add (this.guiControls, 'giroSeccionX2', 0.0, 90.0, 1.0).name ('Giro Sec X2: ').listen();
+		folder.add (this.guiControls, 'giroSeccionX3', 0.0, 90.0, 1.0).name ('Giro Sec X3: ').listen();
+		folder.add (this.guiControls, 'giroSeccionY1', 0.0, 90.0, 1.0).name ('Giro Sec Y1: ').listen();
+		folder.add (this.guiControls, 'giroSeccionY2', 0.0, 90.0, 1.0).name ('Giro Sec Y2: ').listen();
+		folder.add (this.guiControls, 'giroSeccionY3', 0.0, 90.0, 1.0).name ('Giro Sec Y3: ').listen();
+		folder.add (this.guiControls, 'giroSeccionZ1', 0.0, 90.0, 1.0).name ('Giro Sec Z1: ').listen();
+		folder.add (this.guiControls, 'giroSeccionZ2', 0.0, 90.0, 1.0).name ('Giro Sec Z2: ').listen();
+		folder.add (this.guiControls, 'giroSeccionZ3', 0.0, 90.0, 1.0).name ('Giro Sec Z3: ').listen();
 	}
 
 	/*
@@ -304,11 +308,10 @@ class Cubo extends THREE.Mesh {
 	*/
 	decideGiros(){
 		// Decide qué hacer si se ha movido la palanquita de la sección X1
-		if(this.guiControls.giroSeccionX1 != this.controlSecX1 || this.rotating){
+		if(this.guiControls.giroSeccionX1 != this.controlSecX1 || this.controlSecX1 != 0){
 			// Se cambian las posiciones
 			// Centro: 12
 			let positions = [0,3,6,15,24,21,18,9];
-			this.rotating = true;
 			
 			let giro = this.toRadians(this.guiControls.giroSeccionX1) - this.toRadians(this.controlSecX1);
 			//Crea la matriz que se va a usar para rotar los elementos
@@ -346,54 +349,100 @@ class Cubo extends THREE.Mesh {
 				this.guiControls.giroSeccionX1 = 0.0;
 				this.controlSecX1 = 0.0;
 				this.mouseUp = false;
-				this.rotating = false;
 			}
 		}
 		// Decide qué hacer si se ha movido la palanquita de la sección X2
-		if(this.guiControls.giroSeccionX2 > 0.0){
+		if(this.guiControls.giroSeccionX2 != this.controlSecX2 || this.controlSecX2 != 0){
 			// Se cambian las posiciones
 			// Centro: 13
 			let positions = [1,4,7,16,25,22,19,10];
-			this.changePositions(positions);
-			this.changePositions(positions);
-
+			
+			let giro = this.toRadians(this.guiControls.giroSeccionX2) - this.toRadians(this.controlSecX2);
 			//Crea la matriz que se va a usar para rotar los elementos
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
-			matrix.makeRotationX(Math.PI / 2);
+			matrix.makeRotationX(giro);
+
+			this.controlSecX2 = this.guiControls.giroSeccionX2;
 
 			// Se le pasa la matriz giro y las posiciones que rotan
 			this.rotaCubos(matrix, positions);
-
 			// Devuelve la palanquita a 0
-			this.guiControls.giroSeccionX2 = 0.0;
+			//this.guiControls.giroSeccionX1 = 0.0;
+			// Si es multiplo de 90º, se rotan las caras
+
+			if (this.mouseUp){
+				var giro_final;
+				if (this.guiControls.giroSeccionX2 >= 45.0){
+					giro_final = (Math.PI / 2) - (this.toRadians(this.guiControls.giroSeccionX2));
+					matrix.makeRotationX(giro_final);
+				this.changePositions(positions);
+				this.changePositions(positions);
+				}
+				else {
+					giro_final = (this.toRadians(this.guiControls.giroSeccionX2)) * (-1);
+					matrix.makeRotationX(giro_final);
+				}
+				this.rotaCubos(matrix, positions);
+
+
+				this.guiControls.giroSeccionX2 = 0.0;
+				this.controlSecX2 = 0.0;
+				this.mouseUp = false;
+			}
+
+
 		}
 		// Decide qué hacer si se ha movido la palanquita de la sección X3
-		if(this.guiControls.giroSeccionX3 > 0.0){
+		if(this.guiControls.giroSeccionX3 != this.controlSecX3 || this.controlSecX3 != 0){
 			// Se cambian las posiciones
 			// Centro: 14
 			let positions = [2,5,8,17,26,23,20,11];
-			this.changePositions(positions);
-			this.changePositions(positions);
-
+			
+			let giro = this.toRadians(this.guiControls.giroSeccionX3) - this.toRadians(this.controlSecX3);
 			//Crea la matriz que se va a usar para rotar los elementos
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
-			matrix.makeRotationX(Math.PI / 2);
+			matrix.makeRotationX(giro);
+
+			this.controlSecX3 = this.guiControls.giroSeccionX3;
 
 			// Se le pasa la matriz giro y las posiciones que rotan
 			this.rotaCubos(matrix, positions);
+			// Se rota el centro tambien
+			//this.cubies[12].applyMatrix(matrix);
 
 			// Devuelve la palanquita a 0
-			this.guiControls.giroSeccionX3 = 0.0;
+			//this.guiControls.giroSeccionX1 = 0.0;
+			// Si es multiplo de 90º, se rotan las caras
+
+			if (this.mouseUp){
+				var giro_final;
+				if (this.guiControls.giroSeccionX3 >= 45.0){
+					giro_final = (Math.PI / 2) - (this.toRadians(this.guiControls.giroSeccionX3));
+					matrix.makeRotationX(giro_final);
+				this.changePositions(positions);
+				this.changePositions(positions);
+				}
+				else {
+					giro_final = (this.toRadians(this.guiControls.giroSeccionX3)) * (-1);
+					matrix.makeRotationX(giro_final);
+				}
+				//this.cubies[12].applyMatrix(matrix);
+				this.rotaCubos(matrix, positions);
+
+
+				this.guiControls.giroSeccionX3 = 0.0;
+				this.controlSecX3 = 0.0;
+				this.mouseUp = false;
+			}
 		}
 
 		// Decide qué hacer si se ha movido la palanquita de la sección Y1
-		if(this.guiControls.giroSeccionY1 != this.controlSecY1){
+		if(this.guiControls.giroSeccionY1 != this.controlSecY1 || this.controlSecY1 != 0){
 			// Se cambian las posiciones
 			// Centro: 16
 			let positions = [6,7,8,17,26,25,24,15];
-			
 
 			let giro = this.toRadians(this.guiControls.giroSeccionY1) - this.toRadians(this.controlSecY1);
 			//Crea la matriz que se va a usar para rotar los elementos
@@ -411,106 +460,234 @@ class Cubo extends THREE.Mesh {
 			// Devuelve la palanquita a 0
 			//this.guiControls.giroSeccionX1 = 0.0;
 			// Si es multiplo de 90º, se rotan las caras
-			if(this.guiControls.giroSeccionY1 == 90.0){
+			if (this.mouseUp){
+				var giro_final;
+				if (this.guiControls.giroSeccionY1 >= 45.0){
+					giro_final = (Math.PI / 2) - (this.toRadians(this.guiControls.giroSeccionY1));
+					matrix.makeRotationY(giro_final);
 				this.changePositions(positions);
 				this.changePositions(positions);
+				}
+				else {
+					giro_final = (this.toRadians(this.guiControls.giroSeccionY1)) * (-1);
+					matrix.makeRotationY(giro_final);
+				}
+				this.cubies[16].applyMatrix(matrix);
+				this.rotaCubos(matrix, positions);
+
+
+				this.guiControls.giroSeccionY1 = 0.0;
+				this.controlSecY1 = 0.0;
+				this.mouseUp = false;
 			}
 		}
 		// Decide qué hacer si se ha movido la palanquita de la sección Y2
-		if(this.guiControls.giroSeccionY2 > 0.0){
+		if(this.guiControls.giroSeccionY2 != this.controlSecY2 || this.controlSecY2 != 0){
 			// Se cambian las posiciones
 			// Centro: 13
 			let positions = [3,4,5,14,23,22,21,12];
-			this.changePositions(positions);
-			this.changePositions(positions);
-
+			
+			let giro = this.toRadians(this.guiControls.giroSeccionY2) - this.toRadians(this.controlSecY2);
 			//Crea la matriz que se va a usar para rotar los elementos
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
-			matrix.makeRotationY(Math.PI / 2);
+			matrix.makeRotationY(giro);
+
+			this.controlSecY2 = this.guiControls.giroSeccionY2;
 
 			// Se le pasa la matriz giro y las posiciones que rotan
 			this.rotaCubos(matrix, positions);
 
 			// Devuelve la palanquita a 0
-			this.guiControls.giroSeccionY2 = 0.0;
+			//this.guiControls.giroSeccionX1 = 0.0;
+			// Si es multiplo de 90º, se rotan las caras
+
+			if (this.mouseUp){
+				var giro_final;
+				if (this.guiControls.giroSeccionY2 >= 45.0){
+					giro_final = (Math.PI / 2) - (this.toRadians(this.guiControls.giroSeccionY2));
+					matrix.makeRotationY(giro_final);
+				this.changePositions(positions);
+				this.changePositions(positions);
+				}
+				else {
+					giro_final = (this.toRadians(this.guiControls.giroSeccionY2)) * (-1);
+					matrix.makeRotationY(giro_final);
+				}
+				this.rotaCubos(matrix, positions);
+
+
+				this.guiControls.giroSeccionY2 = 0.0;
+				this.controlSecY2 = 0.0;
+				this.mouseUp = false;
+			}
 		}
 		// Decide qué hacer si se ha movido la palanquita de la sección Y3
-		if(this.guiControls.giroSeccionY3 > 0.0){
+		if(this.guiControls.giroSeccionY3 != this.controlSecY3 || this.controlSecY3 != 0){
 			// Se cambian las posiciones
 			// Centro: 10
 			let positions = [0,1,2,11,20,19,18,9];
-			this.changePositions(positions);
-			this.changePositions(positions);
-
+			
+			let giro = this.toRadians(this.guiControls.giroSeccionY3) - this.toRadians(this.controlSecY3);
 			//Crea la matriz que se va a usar para rotar los elementos
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
-			matrix.makeRotationY(Math.PI / 2);
+			matrix.makeRotationY(giro);
+
+			this.controlSecY3 = this.guiControls.giroSeccionY3;
 
 			// Se le pasa la matriz giro y las posiciones que rotan
 			this.rotaCubos(matrix, positions);
 
 			// Devuelve la palanquita a 0
-			this.guiControls.giroSeccionY3 = 0.0;
+			//this.guiControls.giroSeccionX1 = 0.0;
+			// Si es multiplo de 90º, se rotan las caras
+
+			if (this.mouseUp){
+				var giro_final;
+				if (this.guiControls.giroSeccionY3 >= 45.0){
+					giro_final = (Math.PI / 2) - (this.toRadians(this.guiControls.giroSeccionY3));
+					matrix.makeRotationY(giro_final);
+				this.changePositions(positions);
+				this.changePositions(positions);
+				}
+				else {
+					giro_final = (this.toRadians(this.guiControls.giroSeccionY3)) * (-1);
+					matrix.makeRotationY(giro_final);
+				}
+				this.rotaCubos(matrix, positions);
+
+
+				this.guiControls.giroSeccionY3 = 0.0;
+				this.controlSecY3 = 0.0;
+				this.mouseUp = false;
+			}
 		}
 
 		// Decide qué hacer si se ha movido la palanquita de la sección Z1
-		if(this.guiControls.giroSeccionZ1 > 0.0){
+		if(this.guiControls.giroSeccionZ1 != this.controlSecZ1 || this.controlSecZ1 != 0){
 			// Se cambian las posiciones
 			// Centro: 4
 			let positions = [0,1,2,5,8,7,6,3];
-			this.changePositions(positions);
-			this.changePositions(positions);
 
+			let giro = this.toRadians(this.guiControls.giroSeccionZ1) - this.toRadians(this.controlSecZ1);
 			//Crea la matriz que se va a usar para rotar los elementos
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
-			matrix.makeRotationZ(Math.PI / 2);
+			matrix.makeRotationZ(giro);
+
+			this.controlSecZ1 = this.guiControls.giroSeccionZ1;
 
 			// Se le pasa la matriz giro y las posiciones que rotan
 			this.rotaCubos(matrix, positions);
+			this.cubies[4].applyMatrix(matrix);
+			// Se rota el centro tambien
 
 			// Devuelve la palanquita a 0
-			this.guiControls.giroSeccionZ1 = 0.0;
+			//this.guiControls.giroSeccionX1 = 0.0;
+			// Si es multiplo de 90º, se rotan las caras
+			if (this.mouseUp){
+				var giro_final;
+				if (this.guiControls.giroSeccionZ1 >= 45.0){
+					giro_final = (Math.PI / 2) - (this.toRadians(this.guiControls.giroSeccionZ1));
+					matrix.makeRotationZ(giro_final);
+				this.changePositions(positions);
+				this.changePositions(positions);
+				}
+				else {
+					giro_final = (this.toRadians(this.guiControls.giroSeccionZ1)) * (-1);
+					matrix.makeRotationZ(giro_final);
+				}
+				this.rotaCubos(matrix, positions);
+				this.cubies[4].applyMatrix(matrix);
+
+
+				this.guiControls.giroSeccionZ1 = 0.0;
+				this.controlSecZ1 = 0.0;
+				this.mouseUp = false;
+			}
 		}
 		// Decide qué hacer si se ha movido la palanquita de la sección Z2
-		if(this.guiControls.giroSeccionZ2 > 0.0){
+		if(this.guiControls.giroSeccionZ2 != this.controlSecZ2 || this.controlSecZ2 != 0){
 			// Se cambian las posiciones
 			// Centro: 13
 			let positions = [9,10,11,14,17,16,15,12];
-			this.changePositions(positions);
-			this.changePositions(positions);
-
+			
+			let giro = this.toRadians(this.guiControls.giroSeccionZ2) - this.toRadians(this.controlSecZ2);
 			//Crea la matriz que se va a usar para rotar los elementos
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
-			matrix.makeRotationZ(Math.PI / 2);
+			matrix.makeRotationZ(giro);
+
+			this.controlSecZ2 = this.guiControls.giroSeccionZ2;
 
 			// Se le pasa la matriz giro y las posiciones que rotan
 			this.rotaCubos(matrix, positions);
+			// Se rota el centro tambien
 
 			// Devuelve la palanquita a 0
-			this.guiControls.giroSeccionZ2 = 0.0;
+			//this.guiControls.giroSeccionX1 = 0.0;
+			// Si es multiplo de 90º, se rotan las caras
+			if (this.mouseUp){
+				var giro_final;
+				if (this.guiControls.giroSeccionZ2 >= 45.0){
+					giro_final = (Math.PI / 2) - (this.toRadians(this.guiControls.giroSeccionZ2));
+					matrix.makeRotationZ(giro_final);
+				this.changePositions(positions);
+				this.changePositions(positions);
+				}
+				else {
+					giro_final = (this.toRadians(this.guiControls.giroSeccionZ2)) * (-1);
+					matrix.makeRotationZ(giro_final);
+				}
+				this.rotaCubos(matrix, positions);
+
+
+				this.guiControls.giroSeccionZ2 = 0.0;
+				this.controlSecZ2 = 0.0;
+				this.mouseUp = false;
+			}
 		}
 		// Decide qué hacer si se ha movido la palanquita de la sección Z3
-		if(this.guiControls.giroSeccionZ3 > 0.0){
+		if(this.guiControls.giroSeccionZ3 != this.controlSecZ3 || this.controlSecZ3 != 0){
 			// Se cambian las posiciones
 			// Centro: 22
 			let positions = [18,19,20,23,26,25,24,21];
-			this.changePositions(positions);
-			this.changePositions(positions);
-
+			
+			let giro = this.toRadians(this.guiControls.giroSeccionZ3) - this.toRadians(this.controlSecZ3);
 			//Crea la matriz que se va a usar para rotar los elementos
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
-			matrix.makeRotationZ(Math.PI / 2);
+			matrix.makeRotationZ(giro);
+
+			this.controlSecZ3 = this.guiControls.giroSeccionZ3;
 
 			// Se le pasa la matriz giro y las posiciones que rotan
 			this.rotaCubos(matrix, positions);
+			// Se rota el centro tambien
 
 			// Devuelve la palanquita a 0
-			this.guiControls.giroSeccionZ3 = 0.0;
+			//this.guiControls.giroSeccionX1 = 0.0;
+			// Si es multiplo de 90º, se rotan las caras
+			if (this.mouseUp){
+				var giro_final;
+				if (this.guiControls.giroSeccionZ3 >= 45.0){
+					giro_final = (Math.PI / 2) - (this.toRadians(this.guiControls.giroSeccionZ3));
+					matrix.makeRotationZ(giro_final);
+				this.changePositions(positions);
+				this.changePositions(positions);
+				}
+				else {
+					giro_final = (this.toRadians(this.guiControls.giroSeccionZ3)) * (-1);
+					matrix.makeRotationZ(giro_final);
+				}
+				this.rotaCubos(matrix, positions);
+
+
+				this.guiControls.giroSeccionZ3 = 0.0;
+				this.controlSecZ3 = 0.0;
+				this.mouseUp = false;
+			}
 		}
 
 	}
