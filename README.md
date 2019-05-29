@@ -5,6 +5,8 @@ Ahora se gira al pinchar pero luego vuelve a la posición inicial. Estaría bien
 Así podemos conseguir que los controles sigan funcionando a pesar de las rotaciones
 ## 2.- Rotación de las caras
 Hay que intentar que al pinchar y arrastrar un cubo, se mueva su cara anexa en el eje que se quiera, sin usar los controles de la GUI
+## 3.- La documentación
+Tenemos que hacer el diagrama de clases y el modelo jerárquico creo, a parte de un par de cosillas que pedia mas
 
 # Cosas resultonas que podemos añadir de forma sencilla
 ## 1.- Contador de tiempo
