@@ -73,7 +73,7 @@ function mouseMove(event){
 	    x : event.clientX,
 	    y : event.clientY
 	  };
-	} 
+	}
 }
 
 function mouseDown(event){
@@ -84,6 +84,10 @@ function mouseDown(event){
   	    y : event.clientY
   	  };
   }
+
+  else if (event.which == 1){
+  	scene.cubo.mouseUpFalse();
+  }
 }
 
 function mouseUp(event){
@@ -92,6 +96,9 @@ function mouseUp(event){
   	scene.cubo.rotation.x = originalRotation.x;
   	scene.cubo.rotation.y = originalRotation.y;
   	scene.cubo.rotation.z = originalRotation.z;
+  }
+  else if (event.which == 1){
+  		scene.cubo.mouseUpTrue();
   }
 }
 

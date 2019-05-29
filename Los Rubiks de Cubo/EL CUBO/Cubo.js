@@ -13,7 +13,8 @@ class Cubo extends THREE.Mesh {
 		this.setColors();
 		this.coloresMateriales = [];
 		this.setColoresMateriales();
-
+		this.mouseUp = false;
+		this.rotating = false;
 
 		this.cubeDim = 3;
 
@@ -36,6 +37,7 @@ class Cubo extends THREE.Mesh {
 		this.controlSecY1 = 0.0;
 
 	}
+
 
 	/*
 
@@ -234,6 +236,14 @@ class Cubo extends THREE.Mesh {
 		this.cubies[positions[7]] = aux; 
 	}
 
+	mouseUpFalse(){
+		this.mouseUp = false;
+	}
+
+	mouseUpTrue(){
+		this.mouseUp = true;
+	}
+
 	// Función encargada de mostrar los controles de la interfaz
 	createGUI () {
 		this.guiControls = new function () {
@@ -294,10 +304,11 @@ class Cubo extends THREE.Mesh {
 	*/
 	decideGiros(){
 		// Decide qué hacer si se ha movido la palanquita de la sección X1
-		if(this.guiControls.giroSeccionX1 != this.controlSecX1 ){
+		if(this.guiControls.giroSeccionX1 != this.controlSecX1 || this.rotating){
 			// Se cambian las posiciones
 			// Centro: 12
 			let positions = [0,3,6,15,24,21,18,9];
+			this.rotating = true;
 			
 			let giro = this.toRadians(this.guiControls.giroSeccionX1) - this.toRadians(this.controlSecX1);
 			//Crea la matriz que se va a usar para rotar los elementos
@@ -315,9 +326,27 @@ class Cubo extends THREE.Mesh {
 			// Devuelve la palanquita a 0
 			//this.guiControls.giroSeccionX1 = 0.0;
 			// Si es multiplo de 90º, se rotan las caras
-			if(this.guiControls.giroSeccionX1 == 90.0){
+
+			if (this.mouseUp){
+				var giro_final;
+				if (this.guiControls.giroSeccionX1 >= 45.0){
+					giro_final = (Math.PI / 2) - (this.toRadians(this.guiControls.giroSeccionX1));
+					matrix.makeRotationX(giro_final);
 				this.changePositions(positions);
 				this.changePositions(positions);
+				}
+				else {
+					giro_final = (this.toRadians(this.guiControls.giroSeccionX1)) * (-1);
+					matrix.makeRotationX(giro_final);
+				}
+				this.cubies[12].applyMatrix(matrix);
+				this.rotaCubos(matrix, positions);
+
+
+				this.guiControls.giroSeccionX1 = 0.0;
+				this.controlSecX1 = 0.0;
+				this.mouseUp = false;
+				this.rotating = false;
 			}
 		}
 		// Decide qué hacer si se ha movido la palanquita de la sección X2
