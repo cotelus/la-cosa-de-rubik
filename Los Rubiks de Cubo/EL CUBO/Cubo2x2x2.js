@@ -21,9 +21,6 @@ class Cubo2x2x2 extends THREE.Mesh {
 
 		this.getCubePositions();
 
-
-		this.mesh1 = new THREE.Mesh();
-
 		this.cubies = [];
 
 		this.makeCubies();
@@ -63,35 +60,27 @@ class Cubo2x2x2 extends THREE.Mesh {
 		// CUBO 0
 		this.cubies[0] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
 			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		this.mesh1.add(this.cubies[0]);
 		// CUBO 1
 		this.cubies[1] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
 			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		this.mesh1.add(this.cubies[1]);
 		// CUBO 2
 		this.cubies[2] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
 			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		this.mesh1.add(this.cubies[2]);
 		// CUBO 3
 		this.cubies[3] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
 			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		this.mesh1.add(this.cubies[3]);
 		// CUBO 4
 		this.cubies[4] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
 			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		this.mesh1.add(this.cubies[4]);
 		// CUBO 5
 		this.cubies[5] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
 			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		this.mesh1.add(this.cubies[5]);
 		// CUBO 6
 		this.cubies[6] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
 			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		this.mesh1.add(this.cubies[6]);
 		// CUBO 7
 		this.cubies[7] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
 			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		this.mesh1.add(this.cubies[7]);
 	}
 
 	setColors(){
@@ -158,7 +147,7 @@ class Cubo2x2x2 extends THREE.Mesh {
 
 	// Establece la posición de cada cubo con la matriz transformacion TRANSLATE
 	setCubies(){
-		for (let i = 0; i < 8; i++){
+		for (let i = 0; i < this.cubies.length; i++){
 			this.cubies[i].applyMatrix (new THREE.Matrix4().makeTranslation(this.cubePositions[i][0],
 				this.cubePositions[i][1],this.cubePositions[i][2]));
 		}
