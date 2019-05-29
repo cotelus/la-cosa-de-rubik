@@ -261,11 +261,11 @@ class Cubo extends THREE.Mesh {
 		//folder.add (this.guiControls, 'rotacionZ', 0.0, 2*Math.PI, Math.PI/4).name ('Rotación Z : ').listen();
 		
 		// CAMBIO ESTE
-		folder.add (this.guiControls, 'giroSeccionX1', 0.0, Math.PI/2, Math.PI/20).name ('Giro Sec X1: ').listen();
+		folder.add (this.guiControls, 'giroSeccionX1', 0.0, 90.0, 9.0).name ('Giro Sec X1: ').listen();
 		folder.add (this.guiControls, 'giroSeccionX2', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec X2: ').listen();
 		folder.add (this.guiControls, 'giroSeccionX3', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec X3: ').listen();
 		// Y ESTE
-		folder.add (this.guiControls, 'giroSeccionY1', 0.0, Math.PI/2, Math.PI/20).name ('Giro Sec Y1: ').listen();
+		folder.add (this.guiControls, 'giroSeccionY1', 0.0, 90.0, 9.0).name ('Giro Sec Y1: ').listen();
 		folder.add (this.guiControls, 'giroSeccionY2', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec Y2: ').listen();
 		folder.add (this.guiControls, 'giroSeccionY3', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec Y3: ').listen();
 		folder.add (this.guiControls, 'giroSeccionZ1', 0.0, Math.PI/2, Math.PI/2).name ('Giro Sec Z1: ').listen();
@@ -299,8 +299,7 @@ class Cubo extends THREE.Mesh {
 			// Centro: 12
 			let positions = [0,3,6,15,24,21,18,9];
 			
-
-			let giro = this.guiControls.giroSeccionX1 - this.controlSecX1;
+			let giro = this.toRadians(this.guiControls.giroSeccionX1) - this.toRadians(this.controlSecX1);
 			//Crea la matriz que se va a usar para rotar los elementos
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
@@ -316,7 +315,7 @@ class Cubo extends THREE.Mesh {
 			// Devuelve la palanquita a 0
 			//this.guiControls.giroSeccionX1 = 0.0;
 			// Si es multiplo de 90º, se rotan las caras
-			if(this.guiControls.giroSeccionX1 == Math.PI/2){
+			if(this.guiControls.giroSeccionX1 == 90.0){
 				this.changePositions(positions);
 				this.changePositions(positions);
 			}
@@ -367,7 +366,7 @@ class Cubo extends THREE.Mesh {
 			let positions = [6,7,8,17,26,25,24,15];
 			
 
-			let giro = this.guiControls.giroSeccionY1 - this.controlSecY1;
+			let giro = this.toRadians(this.guiControls.giroSeccionY1) - this.toRadians(this.controlSecY1);
 			//Crea la matriz que se va a usar para rotar los elementos
 			var matrix = new THREE.Matrix4();
 			//Rota la matriz
@@ -383,9 +382,9 @@ class Cubo extends THREE.Mesh {
 			// Devuelve la palanquita a 0
 			//this.guiControls.giroSeccionX1 = 0.0;
 			// Si es multiplo de 90º, se rotan las caras
-			if(this.guiControls.giroSeccionY1 == Math.PI/2){
-				//this.changePositions(positions);
-				//this.changePositions(positions);
+			if(this.guiControls.giroSeccionY1 == 90.0){
+				this.changePositions(positions);
+				this.changePositions(positions);
 			}
 		}
 		// Decide qué hacer si se ha movido la palanquita de la sección Y2
@@ -502,6 +501,11 @@ class Cubo extends THREE.Mesh {
 		// Esta función rota todo el objeto sobre todos los ejes
 		//this.rotation.set (0.0, this.guiControls.rotacionY, this.guiControls.rotacionZ);
 		this.decideGiros();
+	}
+
+	toRadians(degrees){
+		var pi = Math.PI;
+		return degrees * (pi/180);
 	}
 
 }
