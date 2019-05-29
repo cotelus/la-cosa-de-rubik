@@ -218,10 +218,10 @@ class Cubo extends THREE.Mesh {
 	}
 	/*
 	 Cambia las posiciones del vector cubePositions respecto a la rotación de la cara 
-	 IMPORTANTÍSIMO: Hay que pasarle el vector de posiciones que rotan en sentido antihorario
+	 IMPORTANTÍSIMO: Hay que pasarle el vector de posiciones que rotan en sentido horario
 	 EJEMPLO DE USO: 		let positions = [6,7,8,17,26,25,24,15];
 							this.changePositions(positions);
-						Rota los cubos 6,7,8,17,26,25,24,15 en sentido horario (pero se seleccionan en sentido antihorario )
+						Rota los cubos 6,7,8,17,26,25,24,15 en sentido antihorario
 	*/
 	changePositions(positions){
 		var aux = this.cubies[positions[0]];
@@ -271,14 +271,82 @@ class Cubo extends THREE.Mesh {
 	/*
 		Esta función, dependiendo de la cara que se vaya a rotar coge un conjunto de cubitos
 		y los rota respecto el eje del cubo de rubik. El problema es que el centro de cada cara
-		no se contempla	en la rotación, ya que 
+		no se contempla	en la rotación, ya que hay que coger los cubos en sentido antihorario, y 
+		no hay una selección clara en el caso de 8 cubos exteriores y 1 cubo central.
+			-La solución es rotar el cubo central a parte sobre su propio eje la misma cantidad
+			que rotan los cubos exteriores. Esta solución además es extrapolable a otros cubos de mayor tamaño,
+			por ejemplo en un 4x4x4, tenemos un anillo exterior de 12 cubos y una interior de 4. 
+			Habria que hacer la misma selección de giros que se hacen aquí, pero primero la cara exterior y luego
+			la interior.
+
+		************ RESUMIENDO ******************
+		Hay que rotar el cubo central de cada cara si fuese necesario.
+
+		***ADEMÁS***
+		Se llama 2 veces a change positions, porque hay que desplazar 2 veces 
+		los cubos que rotan. Hay que mejorar la función changePositions para que
+		admita un valor de desplazamientos a la derecha o algo
 	*/
 	decideGiros(){
 		// Decide qué hacer si se ha movido la palanquita de la sección X1
+		if(this.guiControls.giroSeccionX1 > 0.0){
+			// Se cambian las posiciones
+			let positions = [0,3,6,15,24,21,18,9];
+			this.changePositions(positions);
+			this.changePositions(positions);
+
+			//Crea la matriz que se va a usar para rotar los elementos
+			var matrix = new THREE.Matrix4();
+			//Rota la matriz
+			matrix.makeRotationX(Math.PI / 2);
+
+			// Se le pasa la matriz giro y las posiciones que rotan
+			this.rotaCubos(matrix, positions);
+
+			// Devuelve la palanquita a 0
+			this.guiControls.giroSeccionX1 = 0.0;
+		}
+		// Decide qué hacer si se ha movido la palanquita de la sección X1
+		if(this.guiControls.giroSeccionX2 > 0.0){
+			// Se cambian las posiciones
+			let positions = [1,4,7,16,25,22,19,10];
+			this.changePositions(positions);
+			this.changePositions(positions);
+
+			//Crea la matriz que se va a usar para rotar los elementos
+			var matrix = new THREE.Matrix4();
+			//Rota la matriz
+			matrix.makeRotationX(Math.PI / 2);
+
+			// Se le pasa la matriz giro y las posiciones que rotan
+			this.rotaCubos(matrix, positions);
+
+			// Devuelve la palanquita a 0
+			this.guiControls.giroSeccionX2 = 0.0;
+		}
+		// Decide qué hacer si se ha movido la palanquita de la sección X1
+		if(this.guiControls.giroSeccionX3 > 0.0){
+			// Se cambian las posiciones
+			let positions = [0,3,6,15,24,21,18,9];
+			this.changePositions(positions);
+			this.changePositions(positions);
+
+			//Crea la matriz que se va a usar para rotar los elementos
+			var matrix = new THREE.Matrix4();
+			//Rota la matriz
+			matrix.makeRotationX(Math.PI / 2);
+
+			// Se le pasa la matriz giro y las posiciones que rotan
+			this.rotaCubos(matrix, positions);
+
+			// Devuelve la palanquita a 0
+			this.guiControls.giroSeccionX3 = 0.0;
+		}
+		// Decide qué hacer si se ha movido la palanquita de la sección Y1
 		if(this.guiControls.giroSeccionY1 > 0.0){
 			// Se cambian las posiciones
-			// TIENES QUE AÑADIR EL CENTRO, QUE ES EL 16
 			let positions = [6,7,8,17,26,25,24,15];
+			this.changePositions(positions);
 			this.changePositions(positions);
 
 			//Crea la matriz que se va a usar para rotar los elementos
@@ -292,6 +360,7 @@ class Cubo extends THREE.Mesh {
 			// Devuelve la palanquita a 0
 			this.guiControls.giroSeccionY1 = 0.0;
 		}
+
 	}
 
 	rotaCubos(matrix, positions){
