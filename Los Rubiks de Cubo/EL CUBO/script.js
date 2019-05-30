@@ -85,7 +85,7 @@ function mouseMove(event){
   if (isDragging){
 	  if (typeof(lastMPos.x) != 'undefined'){
 	      var deltaX = lastMPos.x - event.clientX,
-	          deltaY = lastMPos.y - event.clientY;
+          deltaY = lastMPos.y - event.clientY;
 
         // Este primer condicional va a comprobar la variacion de X e Y en un lapso de tiempo pequeño
         if(decidiendoRotacion < 6){
@@ -119,9 +119,11 @@ function mouseMove(event){
 	  };
   }
 
+  /*
   // Esto es solo para mostrar las coordenadas X e Y del ratón. Para las pruebas 
   document.getElementById("posX").innerHTML =  posInicialGiro.x;
   document.getElementById("posY").innerHTML =  posInicialGiro.y;
+  */
 }
 
 function mouseDown(event){
@@ -153,7 +155,7 @@ function mouseUp(event){
     if(girandoY)
     {
       final = posInicialGiro.x - event.clientX;
-      if (final > 60){
+      if (final > 250){
         scene.cubo.guiControls.giroSeccionY1  = 90;
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
@@ -164,7 +166,7 @@ function mouseUp(event){
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
       }
-      if (final < 60){
+      if (final < -250){
         scene.cubo.guiControls.giroSeccionY1  = -90;
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
@@ -179,7 +181,7 @@ function mouseUp(event){
     if(girandoX)
     {
       final = posInicialGiro.y - event.clientY;
-      if (final > 40){
+      if (final > 160){
         scene.cubo.guiControls.giroSeccionX1  = 90;
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
@@ -190,7 +192,7 @@ function mouseUp(event){
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
       }
-      if (final < 40){
+      if (final < -160){
         scene.cubo.guiControls.giroSeccionX1  = -90;
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
