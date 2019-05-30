@@ -298,7 +298,7 @@ class Cubo extends THREE.Mesh {
 		folder.add (this.guiControls, 'giroSeccionZ1', -90.0, 90.0, 1.0).name ('Giro Sec Z1: ').listen();
 		folder.add (this.guiControls, 'giroSeccionZ2', -90.0, 90.0, 1.0).name ('Giro Sec Z2: ').listen();
 		folder.add (this.guiControls, 'giroSeccionZ3', -90.0, 90.0, 1.0).name ('Giro Sec Z3: ').listen();
-		folder.add (this.guiControls, 'random').name('[RANDOM]');
+		folder.add (this.guiControls, 'random').name('¿Me desordeno?');
 	}
 
 	/*
