@@ -17,8 +17,6 @@ class Cubo extends THREE.Mesh {
 		this.contadorRand = 0;
 		this.contadorRot = 0.0;
 
-		this.solvedCube = [];
-
 		this.cubeDim = 3;
 
 		this.cubePositions = [];
@@ -28,16 +26,12 @@ class Cubo extends THREE.Mesh {
 		this.cubies = [];
 
 		this.makeCubies();
-
-
-
 		this.setCubies();
 
-		this.makeSolved();
-		this.setSolved();
 
 		for (let i = 0; i < this.cubies.length; i++){
 			this.add(this.cubies[i]);
+			// Se le añade un nombre a cada cubie para comprobar si se ha resuelto
 			this.cubies[i].name = i;
 		}
 
@@ -164,97 +158,6 @@ class Cubo extends THREE.Mesh {
 			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
 	}
 	
-
-	// Se crea cada cubito y en función de su posición tendrá las caras de un color u otro
-	makeSolved(){
-		let geometry = new THREE.BoxGeometry(this.cubeDim - 0.1, this.cubeDim - 0.1, this.cubeDim - 0.1);
-		
-		// Se inicializa cada cubito del Cubo de Rubik
-		// CUBO 0
-		this.solvedCube[0] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		// CUBO 1
-		this.solvedCube[1] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		// CUBO 2
-		this.solvedCube[2] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
-			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		// CUBO 3
-		this.solvedCube[3] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		// CUBO 4
-		this.solvedCube[4] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		// CUBO 5
-		this.solvedCube[5] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
-			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		// CUBO 6
-		this.solvedCube[6] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
-			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		// CUBO 7
-		this.solvedCube[7] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
-			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
-		// CUBO 8
-		this.solvedCube[8] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
-			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[4],this.coloresMateriales[6]]);
-
-		// CUBO 9
-		this.solvedCube[9] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[6]]);
-		// CUBO 10
-		this.solvedCube[10] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[6]]);
-		// CUBO 11
-		this.solvedCube[11] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
-			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[6]]);
-		// CUBO 12
-		this.solvedCube[12] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
-		// CUBO 13
-		this.solvedCube[13] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
-		// CUBO 14
-		this.solvedCube[14] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
-			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
-		// CUBO 15
-		this.solvedCube[15] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
-			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
-		// CUBO 16
-		this.solvedCube[16] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
-			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
-		// CUBO 17
-		this.solvedCube[17] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
-			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[6]]);
-
-		// CUBO 18
-		this.solvedCube[18] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		// CUBO 19
-		this.solvedCube[19] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		// CUBO 20
-		this.solvedCube[20] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
-			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		// CUBO 21
-		this.solvedCube[21] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		// CUBO 22
-		this.solvedCube[22] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
-			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		// CUBO 23
-		this.solvedCube[23] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
-			this.coloresMateriales[6], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		// CUBO 24
-		this.solvedCube[24] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
-			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		// CUBO 25
-		this.solvedCube[25] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[6],
-			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
-		// CUBO 26
-		this.solvedCube[26] = new THREE.Mesh(geometry, [this.coloresMateriales[6], this.coloresMateriales[1],
-			this.coloresMateriales[2], this.coloresMateriales[6],this.coloresMateriales[6],this.coloresMateriales[5]]);
-	}
-
 	// Esta función comprueba que los cubos están en su lugar respecto la versión original
 	uSure(){
 		let judge = true;
@@ -338,14 +241,7 @@ class Cubo extends THREE.Mesh {
 				this.cubePositions[i][1],this.cubePositions[i][2]));
 		}
 	}
-
-	// Establece la posición de cada cubo con la matriz transformacion TRANSLATE
-	setSolved(){
-		for (let i = 0; i < this.solvedCube.length; i++){
-			this.solvedCube[i].applyMatrix (new THREE.Matrix4().makeTranslation(this.cubePositions[i][0],
-				this.cubePositions[i][1],this.cubePositions[i][2]));
-		}
-	}
+	
 	/*
 	 Cambia las posiciones del vector cubePositions respecto a la rotación de la cara 
 	 IMPORTANTÍSIMO: Hay que pasarle el vector de posiciones que rotan en sentido horario
