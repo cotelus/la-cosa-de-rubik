@@ -73,6 +73,7 @@ class Cubo extends THREE.Mesh {
 		let geometry = new THREE.BoxGeometry(this.cubeDim - 0.1, this.cubeDim - 0.1, this.cubeDim - 0.1);
 		
 		// Se inicializa cada cubito del Cubo de Rubik
+		// derecha-detrás-izquierda-abajo-delante-arriba
 		// CUBO 0
 		this.cubies[0] = new THREE.Mesh(geometry, [this.coloresMateriales[0], this.coloresMateriales[6],
 			this.coloresMateriales[6], this.coloresMateriales[3],this.coloresMateriales[4],this.coloresMateriales[6]]);
@@ -240,16 +241,16 @@ class Cubo extends THREE.Mesh {
 	setColors(){
 		// ROJO
 		this.colores[0] = 0xFF0000;
-		// VERDE
-		this.colores[1] = 0x00FF00;
+		// NARANJA
+		this.colores[1] = 0xFF8000;
 		// AZUL
 		this.colores[2] = 0x0000FF;
-		// AMARILLO
-		this.colores[3] = 0xFFFF00;
+		// VERDE
+		this.colores[3] = 0x00FF00;
 		// BLANCO
 		this.colores[4] = 0xFFFFFF;
-		// VIOLETA
-		this.colores[5] = 0xFF00FF;
+		// AMARILLO
+		this.colores[5] = 0xFFFF00;
 		// NEGRO
 		this.colores[6] = 0x000000;
 	}
