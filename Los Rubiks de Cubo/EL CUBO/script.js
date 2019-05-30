@@ -153,7 +153,7 @@ function mouseUp(event){
     if(girandoY)
     {
       final = posInicialGiro.x - event.clientX;
-      if (final > 90){
+      if (final > 60){
         scene.cubo.guiControls.giroSeccionY1  = 90;
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
@@ -164,11 +164,22 @@ function mouseUp(event){
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
       }
+      if (final < 60){
+        scene.cubo.guiControls.giroSeccionY1  = -90;
+        scene.cubo.update();
+        scene.cubo.mouseUpTrue();
+        scene.cubo.guiControls.giroSeccionY2  = -90;
+        scene.cubo.update();
+        scene.cubo.mouseUpTrue();
+        scene.cubo.guiControls.giroSeccionY3  = -90;
+        scene.cubo.update();
+        scene.cubo.mouseUpTrue();
+      }
     }
     if(girandoX)
     {
       final = posInicialGiro.y - event.clientY;
-      if (final > 90){
+      if (final > 40){
         scene.cubo.guiControls.giroSeccionX1  = 90;
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
@@ -176,6 +187,17 @@ function mouseUp(event){
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
         scene.cubo.guiControls.giroSeccionX3  = 90;
+        scene.cubo.update();
+        scene.cubo.mouseUpTrue();
+      }
+      if (final < 40){
+        scene.cubo.guiControls.giroSeccionX1  = -90;
+        scene.cubo.update();
+        scene.cubo.mouseUpTrue();
+        scene.cubo.guiControls.giroSeccionX2  = -90;
+        scene.cubo.update();
+        scene.cubo.mouseUpTrue();
+        scene.cubo.guiControls.giroSeccionX3  = -90;
         scene.cubo.update();
         scene.cubo.mouseUpTrue();
       }
