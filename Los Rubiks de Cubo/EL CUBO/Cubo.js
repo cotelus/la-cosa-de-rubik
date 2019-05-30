@@ -922,9 +922,6 @@ class Cubo extends THREE.Mesh {
 			document.getElementById("posX").innerHTML =  "";
 		}
 
-		var object = this.getObjectByName( 0 );
-		document.getElementById("posX").innerHTML = object.name;
-
 		// Función que se encarga de realizar los giros en cada eje
 		this.decideGiros();
 
