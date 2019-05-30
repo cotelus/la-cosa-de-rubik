@@ -160,12 +160,79 @@ class Cubo extends THREE.Mesh {
 	
 	// Esta función comprueba que los cubos están en su lugar respecto la versión original
 	uSure(){
+		/*
 		let judge = true;
 		for(let i = 0; i < this.cubies.length && judge; i++ ){
 			if(this.cubies[i].name != i){
 				judge = false;
 			}
 		}
+		return judge;
+		*/
+
+		let judge = false;
+		let xis = true;
+		let yis = true;
+		let zis = true;
+		// Comprueba que la cara frontal tiene al menos una coordenada en el mismo igual en todos los cubos
+		for(let i = 0; i < 7; i++){
+			var este = this.getObjectByName( i );
+			var siguiente = this.getObjectByName( i+1 );
+			if(Math.round(este.position.x) != Math.round(siguiente.position.x)){
+				xis = false;
+			}
+			if(Math.round(este.position.y) != Math.round(siguiente.position.y)){
+				yis = false;
+			}
+			if(Math.round(este.position.z) != Math.round(siguiente.position.z)){
+				zis = false;
+			}
+		}
+		// Si la cara anterior pasa la prueba, se pasa ahora a la siguiente
+		if (xis || yis || zis){
+			let xih = true;
+			let yih = true;
+			let zih = true;
+			// Comprueba que la cara del medio tiene al menos una coordenada en el mismo igual en todos los cubos
+			for(let i = 9; i < 17; i++){
+				var este = this.getObjectByName( i );
+				var siguiente = this.getObjectByName( i+1 );
+				if(Math.round(este.position.x) != Math.round(siguiente.position.x)){
+					xih = false;
+				}
+				if(Math.round(este.position.y) != Math.round(siguiente.position.y)){
+					yih = false;
+				}
+				if(Math.round(este.position.z) != Math.round(siguiente.position.z)){
+					zih = false;
+				}
+			}
+
+			if (xih || yih || zih){
+				let xij = true;
+				let yij = true;
+				let zij = true;
+				// Comprueba que la cara Trasera tiene al menos una coordenada en el mismo igual en todos los cubos
+				for(let i = 18; i < 26; i++){
+					var este = this.getObjectByName( i );
+					var siguiente = this.getObjectByName( i+1 );
+					if(Math.round(este.position.x) != Math.round(siguiente.position.x)){
+						xij = false;
+					}
+					if(Math.round(este.position.y) != Math.round(siguiente.position.y)){
+						yij = false;
+					}
+					if(Math.round(este.position.z) != Math.round(siguiente.position.z)){
+						zij = false;
+					}
+				}
+	
+				if (xij || yij || zij){
+					judge = true;
+				}
+			}
+		}
+
 		return judge;
 	}
 
@@ -241,7 +308,7 @@ class Cubo extends THREE.Mesh {
 				this.cubePositions[i][1],this.cubePositions[i][2]));
 		}
 	}
-	
+
 	/*
 	 Cambia las posiciones del vector cubePositions respecto a la rotación de la cara 
 	 IMPORTANTÍSIMO: Hay que pasarle el vector de posiciones que rotan en sentido horario
@@ -853,6 +920,9 @@ class Cubo extends THREE.Mesh {
 		}else{
 			document.getElementById("posX").innerHTML =  "";
 		}
+
+		var object = this.getObjectByName( 0 );
+		document.getElementById("posX").innerHTML = object.name;
 
 		// Función que se encarga de realizar los giros en cada eje
 		this.decideGiros();
