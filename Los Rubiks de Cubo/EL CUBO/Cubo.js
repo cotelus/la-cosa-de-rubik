@@ -368,10 +368,19 @@ class Cubo extends THREE.Mesh {
 			this.solved = function(){
 				this.isSolved = true;
 			}
+
+			this.vic = function(){
+				window.location.href = "http://github.com/vicferpoy";
+			}
+
+			this.luis = function(){
+				window.location.href = "http://github.com/cotelus";
+			}
 		} 
 		
 		// Se crea una sección para los controles de la caja
 		var folder = gui.addFolder ('Controles del cubo');
+		var doneby = gui.addFolder ('Crafteado por:');
 		// Estas lineas son las que añaden los componentes de la interfaz
 		// Las tres cifras indican un valor mínimo, un máximo y el incremento
 		// Hay que cambiar el Math.PI/4 por Math.PI/2 cuando se haga la rotación bien
@@ -389,6 +398,9 @@ class Cubo extends THREE.Mesh {
 		folder.add (this.guiControls, 'giroSeccionZ3', -90.0, 90.0, 1.0).name ('Giro Sec Z3: ').listen();
 		folder.add (this.guiControls, 'random').name('¿Me desordeno?').listen();
 		folder.add (this.guiControls, 'isSolved').name('¡JA! Te resolví').listen();
+
+		doneby.add (this.guiControls, 'luis').name('Luis Ángel Cotelo Leyva').listen();
+		doneby.add (this.guiControls, 'vic').name('Víctor Fernández Poyatos').listen();
 	}
 
 	/*
